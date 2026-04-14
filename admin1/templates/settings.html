@@ -1,0 +1,54 @@
+{% extends "admin_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Admin Settings {% endblock %}
+
+{% block breadcrumb %} <a href="{% url 'dashboard' %}">Dashboard</a>  /  <a href="{% url 'profile' %}">Loan Admin</a> {% endblock %}
+{% block breadcrumb_active %} Settings {% endblock %}
+{% block dashboard_title %} Admin Settings {% endblock %}
+
+{% block css %}
+  <style>
+
+    label {
+      margin-top: 20px;
+      color: blue;
+      display: block;
+      width: 100%;
+    
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
+      
+  </style>
+
+{% endblock css %}
+
+{% block content %}
+
+
+  <div class="row mt-3">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+      <div class="card">
+        <div class="card-header bg-secondary pt-2 pr-2 pb-0 pl-2">
+          <h4 class="text-light mb-0 pt-1 pb-1">Loan Admin Settings</h4>
+        </div>
+        <div class="card-body pt-4 p-3">
+          <form method="post">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <br>
+              <button type="submit" class="btn btn-primary">UPDATE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Ends Here -->
+  
+
+ 
+{% endblock %}

@@ -1,0 +1,64 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Html Generated</title>
+    <meta name="description" content="Figma htmlGenerator">
+    <meta name="author" content="htmlGenerator">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{domain}}/static/generate/irsda/styles.css">
+
+    <style>
+              /*
+                Figma Background for illustrative/preview purposes only.
+                You can remove this style tag with no consequence
+              */
+              body {background: #E5E5E5; }
+            </style>
+
+  </head>
+
+  <body>
+    <div class=e1_4><div class="e1_5"></div><span class="e1_6">IRREVOCABLE
+        AUTHORITY TO DEDUCT SALARY/WAGES (IATDS)</span><span
+        class="e1_7">_____________________________________________________________________________________________________________</span><span
+        class="e1_8">_____________________________________________________________________________________________________________</span><span
+        class="e1_9">Branch: <span style="color: blue;"><u>{{ settings.BANK1_BRANCH }}</u></span> <span style="margin-left: 30px">Acc. NUMBER:</span>
+        <span style="color: blue;"><u>{{ settings.BANK1_ACC_NUM }}</u></span> </span><span class="e1_28">
+        BANK: <span style="color: blue;"><u>{{ settings.BANK1 }}</u></span> <span style="margin-left: 30px">Acc. NAME:</span> <span style="color: blue;"><u>{{ settings.BANK1_ACC_NAME }}</u></span>
+      </span><span class="e1_10">You are also authorised to remit from my final
+        pay entitlements the oustanding balance of my loan upon my resignation
+        or termination of employment to {{ settings.COMPANY_NAME }} or its appointed
+        nominee.</span><span class="e1_11">I hereby authorise you to deduct the
+        sum of <span style="color: blue;"><u>K {{ loan.repayment_amount }}</u></span> from my <span style="color: blue;"><u>{{ loan.repayment_frequency }}</u></span> salary and
+        remit by cheque, cash or via online banking to {{ settings.COMPANY_NAME }} bank account as
+        follows: </span><span class="e1_12">Deduction Start Date:
+          <span style="color: blue;"><u>{{ loan.repayment_start_date }}</u></span> </span><span class="e1_30">Number of
+        Fortnights:<span style="color: blue;"><u>{{ loan.number_of_fortnights }} fortnights</u></span> </span><span class="e1_31">Deduction
+        Cease:<span style="color: blue;"><u>{{ loan.expected_end_date }}</u></span> </span><span class="e1_13">Pay
+        Period Start Number: _______________
+      </span><span class="e1_32">Pay Period End Number:________________________
+      </span><span class="e1_14">To: {{ user.employer }} Accounts / Finance / HR /
+        Payroll</span><span class="e1_15">Date:
+        ___________________________</span><span class="e1_16">From:
+          <span style="color: blue;"><u>{{ user.first_name }} {{ user.last_name }}</u></span> </span><span class="e1_17">Sign Here:
+        ________________________________________</span><span class="e1_33">Full
+        Name (Borrower): <span style="color: blue;">{{ user.first_name }} {{ user.last_name }}</span></span><span
+        class="e1_18">WorkID#: <span style="color: blue;"><u>{{ user.work_id_number }}</u></span></span><span
+        class="e1_19">Approved By:
+        __________________________________________________</span><span
+        class="e1_29">Signature: ___________________________________ Date:
+        ____________</span><span class="e1_20">Company/Official
+        Stamp/Seal</span><span class="e1_21">Government Deduction Code (for
+        Public Servant Employees):</span><span class="e1_22">The above authority
+        is irrevocable without the written consent of {{ settings.COMPANY_NAME }} and deliverate
+        attempt to revoke may result in possible legal action action
+        payroll.</span><span class="e1_23">______________________________
+          <br>Pay Officer’s Signature</span><span class="e1_24">____________________
+        Date</span><span class="e1_25"><span style="color: blue;"><u>{{ settings.ALESCO_DC }}</u></span></span><span
+        class="e1_26">_____________________________
+        <br>Pay Officer’s Full Name</span><span class="e1_27">Date:
+        ____________________</span></div>
+  </body>
+</html>

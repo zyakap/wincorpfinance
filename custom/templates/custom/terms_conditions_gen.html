@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Terms & Conditions</title>
+  <meta name="description" content="Terms & Conditions">
+  <meta name="author" content="WEBMASTA">
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{domain}}/static/generate/terms_conditions/styles.css" />
+
+  <style>
+    /*
+                Figma Background for illustrative/preview purposes only.
+                You can remove this style tag with no consequence
+              */
+    body {
+      background: #ffffff;
+    }
+  </style>
+
+</head>
+
+<body class="containx">
+  <div class=e1_2><span class="e1_55">PART D - Credit information - Authority to obtain & provide personal, financial &
+      credit information:</span><span class="e1_57">11. The undersigned borrower authorizes {{ settings.COMPANY_NAME }} to: a) Obtain a credit
+      report containing personal financial & credit information in relation to the undersigned from a Credit Agency; b)
+      Utilize the credit report to assist in the assesment of any loan or credit application by the borrower; c)
+      Exchange personal financial and credit information in relation to the undersigned borrower with other credit
+      providers including details of loans obtained from {{ settings.COMPANY_NAME }}; and d) Inform a Credit Reporting Agency of any default in
+      repayment of the credit provided to the undersigned borrower (s).</span><span class="e1_58">PART F: Indemnity by
+      Borrower:</span><span class="e1_59">12. It is acknowledged that the borrower certifies that the information
+      contained within this agreement is true and correct in every particular</span><span class="e1_60">PART G:
+      Borrowers Acknowledgement:</span><span class="e1_61">15. I <span style="color: blue;"><u>{{ user.first_name }} {{ user.last_name }}</u></span>
+      of <span style="color: blue;"><u>{{ user.residential_address }}</u></span> (address) the borrower hereby confirms and
+      acknowledges the following:
+      <br>a) That I have fully read and understood the terms and conditions of this contract as set out above; and
+      <br>b) Acknowledge that by signing this contract I are legally bound by the said terms and conditions therein.
+
+      <br><br>Executed by the said parties on the _________day of ______________ 2024.</span>
+      <br>
+      <span class="e1_63">SIGN HERE:
+      ________________________________________________</span><span class="e1_64">FULL NAME:
+      __________________________________________________________</span><span class="e105_3">DATE:
+      ____________________________</span>
+    <div class="e1_3"></div><span class="e1_4">LOAN AGREEMENT / TERMS & CONDITIONS</span><span
+      class="e1_5">______________________________________________________________________________________________________________________________________________________________________________________</span><span
+      class="e105_2">______________________________________________________________________________________________________________________________________________________________________________________</span><span
+      class="e1_8">PART A - Borrowers Obligations:</span><span class="e1_10">1. The borrower (s), as herein, hereby agrees
+      under contract to borrow the principle loan sum of K <span style="color: blue;"><u>{{ loan.amount }}</u></span> which is to be repaid over <span style="color: blue;"><u>{{ loan.number_of_fortnights }}</u></span>
+      fortnightly instalments of K <span style="color: blue;"><u>{{ loan.repayment_amount }}</u></span>. 
+      First loan repayment will commence on <span style="color: blue;"><u>{{ loan.repayment_start_date }}</u></span>
+      until such time that the loan amount inclusive of principle, interest and any fees are repaid in full.
+      <br>2. The Borrower agrees to meet instalments on the due dates and in the manner prescribed within this contract and
+      meet the associated application fee.
+      <br>3. The borrower is to immediately advise {{ settings.COMPANY_NAME }} of any changes in residential address or employment.
+      <br>4. Should the borrower resign from, or be terminated by their employer, any entitlements with their employer shall,
+      in the first instance, be directed to {{ settings.COMPANY_NAME }} to meet associated debt obligations.</span><span
+      class="e1_9"></span><span class="e1_50">PART B - Interest Rate:</span><span class="e1_52">5. Interest rate is fixed and is factored into the repayment. </span><span class="e1_53">PART C - Default:</span><span
+      class="e1_54">6. An act of default will be deemed to have taken place under the following circumstances:
+      <br>a) The borrower fails to repay any component of principle or interest within five (5) days of the loan repayment
+      due date.
+      <br>b) The borrower provides false or misleading information or data in relation to this agreement.
+      <br>c) The borrower becomes insolvent or is declared bankrupt.
+      <br>d) The borrower commits to new 3rd party loans without the prior written knowledge or consent of {{ settings.COMPANY_NAME }}.
+
+      <br>7. Should the borrower suffer an act of default, as defined above, all monies owing to {{ settings.COMPANY_NAME }} become due and payable
+      on demand.
+      <br>8. On all monies including principle loan sum, default interest will be charged at a flat rate of K{{ settings.DEFAULT_INTEREST }} every fortnight instalment missed including associated
+      enforcement expenses as set out below until the loan is no longer in arrears.
+      <br>9. As per clause 8 above the borrower may incur enforcement expenses should the loan fall into default as defined
+      under Clause 6 sub clauses a), b) c) or d) Such expenses and costs include associated expenses reasonably incurred
+      by {{ settings.COMPANY_NAME }} when exercising its right of enforcement and/or all other expenses and damages incurred by {{ settings.COMPANY_NAME }} as a direct
+      or indirect result of your breaching this contract.
+      <br>10. Such expenses, as referred to above, may be added to your existing loan balance at any time and at the
+      discretion of {{ settings.COMPANY_NAME }}. Accordingly, the loan balance becomes due and payable on demand.</span>
+  </div>
+</body>
+
+</html>

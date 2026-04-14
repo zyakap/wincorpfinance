@@ -1,0 +1,224 @@
+{% load static %}
+{% load humanize %}
+{% load site_filter %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="E-INT Finance Limited - Digital lending solutions for fast, reliable, and accessible financing." />
+  <title>E-INT Finance | Digital Lending Solution</title>
+  <!-- Favicons -->
+  <link href="{% static 'clientfiles/favicon.png' %}" rel="icon">
+  <link href="{% static 'clientfiles/favicon.png' %}" rel="apple-touch-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+    <!-- Main CSS File -->
+  <link href="{% static 'website/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a href="#top" class="brand">E-INT Finance</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#contact">Contact</a>
+        <a class="green-btn" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+        <a class="blue-btn" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">DIGITAL LENDING SOLUTION</span>
+          <h1>Fast, flexible finance built for modern customers.</h1>
+          <p>
+            E-INT Finance Limited delivers accessible lending solutions with a digital-first
+            experience designed for speed, convenience, and trust.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+            <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+            <a class="btn btn-secondary" href="#services">View Services</a>
+          </div>
+          <div class="contact-strip">
+            <span>📞 83631700</span>
+            <span>✉ info@eintfinance.com</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="logo-card">
+            <img src="{% static 'clientfiles/imgs/logo.png' %}" alt="E-INT Finance Limited Logo" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-grid">
+        <article class="stat-card">
+          <h3>Quick Processing</h3>
+          <p>Applications reviewed with a streamlined digital workflow.</p>
+        </article>
+        <article class="stat-card">
+          <h3>Trusted Service</h3>
+          <p>Professional finance support focused on customer confidence.</p>
+        </article>
+        <article class="stat-card">
+          <h3>Accessible Lending</h3>
+          <p>Practical solutions tailored to real financial needs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container two-col">
+        <div>
+          <p class="section-label">About Us</p>
+          <h2>Your reliable partner in digital finance.</h2>
+        </div>
+        <div>
+          <p>
+            E-INT Finance Limited is positioned to provide fast and dependable financing
+            services through a modern digital lending model. Our goal is to simplify access
+            to funding and deliver a smooth customer experience from application to approval.
+          </p>
+          <p>
+            With a strong emphasis on efficiency, transparency, and convenience, we help
+            individuals and businesses engage with finance in a smarter way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="services">
+      <div class="container">
+        <p class="section-label center">Our Services</p>
+        <h2 class="center">Finance services designed for speed and simplicity.</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Personal Loans</h3>
+            <p>Flexible financing options for urgent and planned personal needs.</p>
+          </article>
+          <article class="card">
+            <h3>Business Support</h3>
+            <p>Practical funding solutions to support operations and business growth.</p>
+          </article>
+          <article class="card">
+            <h3>Digital Applications</h3>
+            <p>Convenient online application processes that save time and reduce delays.</p>
+          </article>
+          <article class="card">
+            <h3>Customer Assistance</h3>
+            <p>Friendly support to guide applicants through each stage of the process.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benefits">
+      <div class="container">
+        <p class="section-label center">Why Choose Us</p>
+        <h2 class="center">Simple, responsive, and customer-focused.</h2>
+        <div class="benefits-grid">
+          <div class="benefit">
+            <span class="icon">✓</span>
+            <div>
+              <h3>Fast Response</h3>
+              <p>We prioritize efficient communication and timely processing.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <span class="icon">✓</span>
+            <div>
+              <h3>Digital Convenience</h3>
+              <p>Modern tools make it easier to access and manage financing services.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <span class="icon">✓</span>
+            <div>
+              <h3>Professional Support</h3>
+              <p>Our team is committed to clear guidance and dependable service delivery.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <span class="icon">✓</span>
+            <div>
+              <h3>Customer Trust</h3>
+              <p>We aim to build long-term relationships through transparency and care.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="container cta-box">
+        <div>
+          <p class="section-label">Start Today</p>
+          <h2>Need finance support? Let’s talk.</h2>
+          <p>Contact E-INT Finance Limited to learn more about our digital lending solutions.</p>
+        </div>
+        <a class="btn btn-primary" href="#contact">Contact Us</a>
+      </div>
+    </section>
+
+    <section class="section alt" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <p class="section-label">Contact</p>
+          <h2>Get in touch with us.</h2>
+          <p>We’re ready to help you with your lending and finance enquiries.</p>
+
+          <div class="contact-list">
+            <div><strong>Phone:</strong> 83631700</div>
+            <div><strong>Email:</strong> info@eintfinance.com</div>
+            <div><strong>Company:</strong> E-INT Finance Limited</div>
+            <div><strong>Service:</strong> Digital Lending Solution</div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full">Send Enquiry</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> E-INT Finance Limited. All rights reserved.</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+ 
+  <!-- Main JS File -->
+  <script src="{% static 'website/script.js' %}"></script>
+</body>
+</html>

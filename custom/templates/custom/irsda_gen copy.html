@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  
+    <title>Html Generated</title>
+    <meta name="description" content="Figma htmlGenerator">
+    <meta name="author" content="htmlGenerator">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{domain}}/static/generate/irsda/styles.css">
+    
+   
+  
+  </head>
+  
+  <body>
+    <div class=e1_2>
+      <span  class="e1_3">IRREVOCABLE AUTHORITY TO DEDUCT SALARY/WAGES</span>
+      <span  class="e1_4">
+BANK: <span style="color: blue;"><u>{{ settings.BANK1 }}</u></span>                Acc. NAME:  <u><span>{{ settings.BANK1_ACC_NAME }}</u></span>
+Branch:  <u><span>{{ settings.BANK1_BRANCH }}</u></span>            Acc. NUMBER:  <u><span>{{ settings.BANK1_ACC_NUM }}</u></span>          
+</span>
+<span  class="e4_35">You are also authorised to remit from my final pay entitlements the oustanding balance of my loan upon my resignation or termination of employment to {{ settings.COMPANY_NAME }} or its appointed nominee.</span>
+<span  class="e4_34">I hereby authorise you to deduct the sum of K <u><span>{{ loan.repayment_amount }}</u></span> from my <u><span>{{ loan.repayment_frequency }}</u></span> salary and remit by cheque, cash or via online banking to {{ settings.COMPANY_NAME }} bank account as follows: </span>
+<span  class="e1_8">Deduction Start Date: {{ loan.repayment_start_date }} 
+
+Number of Fortnights: <u><span>{{ loan.repayment_start_date }}</u></span> 
+Deduction Cease: <u><span>{{ loan.expected_end_date }}</u></span> 
+</span>
+<span  class="e3_23">Pay Period Start Number: _______________ 
+
+Pay Period End Number:________________________ 
+</span>
+<span  class="e3_9">_____________________________________________________________________________________________________________</span>
+<span  class="e3_10">_____________________________________________________________________________________________________________</span>
+<div  class="e3_11"></div>
+<span  class="e3_14">To: Accounts / Finance / HR / Payroll</span>
+<span  class="e3_15">Date: ___________________________</span>
+<div  class="e3_16"></div>
+<span  class="e3_17">From: <u><span>{{ user.first_name }} {{ user.last_name }}</u></span> </span>
+<span  class="e3_31">Sign Here: ________________________________
+                   Full Name (Borrower)</span>
+                   <span  class="e3_18">WorkID#: <u><span>{{ user.work_id_number }}</u></span></span>
+                   <span  class="e3_20">Approved By: __________________________________________________
+
+Signature: ___________________________________ Date: ____________</span>
+<span  class="e3_21">Company / Official Stamp / Seal</span>
+<span  class="e3_22">Government Deduction Code (for Public Servant Employees):</span>
+<span  class="e3_24">The above authority is irrevocable without the written consent of {{ settings.COMPANY_NAME }} and deliverate attempt to revoke may result in possible legal action action payroll.</span>
+<span  class="e3_27">______________________________
+  <br>Pay Officer’s Signature</span>
+<span  class="e3_28">____________________
+Date</span>
+<span  class="e3_30">{{ settings.ALESCO_DC }}</span>
+<div  class="e3_13"></div>
+<span  class="e3_25">_____________________________
+<br>Pay Officer’s Full Name</span>
+<span  class="e3_33">Date: ____________________</span>
+</div>
+          </body>
+          </html>

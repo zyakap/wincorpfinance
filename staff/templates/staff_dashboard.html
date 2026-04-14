@@ -1,0 +1,459 @@
+{% extends "staff_base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} Staff Dashboard {% endblock %}
+
+{% block breadcrumb %} <a href="{% url 'staff_dashboard' %}">Staff Dashboard</a> {% endblock %}
+{% block dashboard_title %} Dashboard {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'DataTables/datatables.min.css' %}"/>
+<!-- Font Awesome Icons -->
+<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+        
+        
+ 
+  <!-- Content Goes Here -->
+
+ 
+  <div class="row mt-5">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">receipt</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">This Week's Payments</p>
+            <h4 class="mb-0">{% if totalpayments %} K{{ totalpayments|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %}</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0 p-0">
+        <div class="card-footer pr-3 pl-1 pt-1 pb-2">
+          <p class="m-0 p-0">Expected: <span class="text-success text-sm font-weight-bolder">{% if totalexpected %} K{{ totalexpected|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %}</span></p>
+          <p class="m-0 p-0">Defaults: <span class="text-success text-sm font-weight-bolder">{% if totaldefaults %} K{{ totaldefaults|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %}</span></p>
+          <p class="m-0 p-0"><a href="{% url 'pending_loans' %}" target="_blank"><span class="text-primary">Payment Uploads: </span></a><span class="badge bg-dark m-0 text-md" style="padding: 3px;">{{ payment_uploads }}</span></span></p>
+          
+        </div>
+      </div>
+    </div> 
+
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">business_center</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">This Week's Loans</p>
+            <h4 class="mb-0">{% if total_loans_funded %} K{{ total_loans_funded|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %}</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer pr-3 pl-1 pt-1 pb-2">
+          <p class="m-0 p-0"><span class="badge bg-dark m-0 text-md" style="padding: 3px;">{{ loans_funded.count }}</span> Loan{{ loans_funded.count|pluralize }} - Interest: <span class="text-success text-sm font-weight-bolder">{% if total_expected_interest %} K{{ total_expected_interest|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %}</span></p>
+          <p class="m-0 p-0"><a href="{% url 'pending_loans' %}" target="_blank"><span class="badge bg-dark m-0 text-md" style="padding: 3px;">{{ loans_pending.count }}</span> <span class="text-primary">Application{{ loans_pending.count|pluralize }}:</span></a> <span class="text-success text-sm font-weight-bolder">{% if totalpending %} K{{ totalpending|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %}</span></p>
+          <p class="m-0 p-0"><a href="{% url 'funding_list' %}" target="_blank"><span class="badge bg-dark m-0 text-md" style="padding: 3px;">{{ loans_pending_funding.count }}</span> <span class="text-primary">Pending Funds:</span></a> <span class="text-success text-sm font-weight-bolder">{% if totalpending_funding %} K{{ totalpending_funding|default_if_none:"0"|floatformat:2|intcomma }}{% else %} 0 {% endif %} </span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">people</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">This Month's Users</p>
+            <h4 class="mb-0">{{ registered }} Users</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer pr-3 pl-1 pt-1 pb-2">
+          <p class="m-0 p-0">Registerd: <span class="text-success text-sm font-weight-bolder">{{ registered }}</span></p>
+          <p class="m-0 p-0"><a href="{% url 'customers_pending' %}" target="_blank"><span class="text-primary">Pending Activation:</span></a> <span class="text-success text-sm font-weight-bolder">{{ pending_activation }}</span></p>
+          <p class="m-0 p-0"><a href="{% url 'customers_flagged' %}" target="_blank"><span class="text-primary">Defaulted:</span></a> <span class="text-success text-sm font-weight-bolder">{{ defaulted_customers }}</span></p>
+        
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">queue_play_next</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">This Week's Support</p>
+            <h4 class="mb-0">0 Tickets</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer pr-3 pl-1 pt-1 pb-2">
+          <p class="m-0 p-0">Closed Out: <span class="text-success text-sm font-weight-bolder">0</span></p>
+          <p class="m-0 p-0">Overdue Tickets: <span class="text-success text-sm font-weight-bolder">0</span></p>
+          <p class="m-0 p-0"><a href="#" target="_blank"><span class="text-primary">Open Tickets:</span></a> <span class="text-success text-sm font-weight-bolder">0</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4 mb-2">
+    <div style="padding-left: 20px; padding-top: 10px;">
+      <h6>Staff Functions</h6>
+      <hr style="border: 1px solid blue" class="mt-1 mb-1 p-0">
+    </div>
+    <div class="row mt-1 pb-1">
+    
+      <div class="col-lg-2 col-md-4">
+        <div class="card-body mt-0 pt-2 mb-0 pb-0">
+          <h1>
+            <a href="{% url 'add_user' %}">
+            <button type="button" class="btn btn-primary btn-lg">+ Add Customer</button>
+            </a>
+          </h1>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4">
+        <div class="card-body mt-0 pt-2 mb-0 pb-0">
+          <h1>
+            <a href="{% url 'create_loan' %}">
+            <button type="button" class="btn btn-success btn-lg">+ Add Loan</button>
+            </a>
+          </h1>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4">
+        <div class="card-body mt-0 pt-2 mb-0 pb-0">
+          <h1>
+            <a href="{% url 'staff_enter_payment' %}">
+            <button type="button" class="btn btn-dark btn-lg">+ Add Payment</button>
+            </a>
+          </h1>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-4">
+        <div class="card-body mt-0 pt-2 mb-0 pb-0">
+          <h1>
+            <a href="{% url 'send_repayment_reminder' %}">
+            <button type="button" class="btn btn-secondary btn-lg">Repayment Reminder</button>
+            </a>
+          </h1>
+        </div>
+      </div>
+      
+      <div class="col-lg-2 col-md-4">
+        <div class="card-body mt-0 pt-2 mb-0 pb-0">
+          <h1>
+            <a href="{% url 'run_defaults' %}">
+            <button type="button" class="btn btn-warning btn-lg">Run Defaults</button>
+            </a>
+          </h1>
+        </div>
+      </div>
+      
+      <div class="col-lg-2 col-md-4">
+        <div class="card-body mt-0 pt-2 mb-0 pb-0">
+          <h1>
+            <a href="#">
+            <button type="button" class="btn btn-primary btn-lg">Run Reports</button>
+            </a>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="row mt-2">
+
+    <div class="col-lg-6 col-md-6 mt-4 mb-4">
+      <div class="card ">
+        <div class="card-header m-0 p-0">
+
+          <h5 class="text-primary text-sm pt-3" style="padding-left: 10px;">Pending Loan Applications</h5>
+            <hr style="border: 1px solid blue" class="mt-1 mb-1 p-0">
+
+          
+        </div>
+
+        <div class="card-body mt-0 pt-0">
+          <!-- TABLE BEGINS -->
+          <div class="table-responsive p-1 mt-0 pt-0">
+            <table id="allLoansTable" class="table table-striped table-hover align-items-center justify-content-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Loan Ref</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">First Name</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Last Name</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Type</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Amount</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Repayment</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">FNs</th>
+                  <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Status</th>
+               
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for loan in pending_loans %}
+                <tr>
+                  <TD>
+                      <div class="d-flex px-1">
+                          <div>
+                         {% if loan.owner.propic_url %}<img src="{{ loan.owner.propic_url }}" class="avatar avatar-xs rounded-circle me-1" alt="invision">{% else %}<img src="{% static 'img/profilepicture.png' %}" class="avatar avatar-xs rounded-circle me-1" alt="invision">{% endif %}
+                          </div>
+                          <div class="my-auto">
+                          <h6 class="mb-0 text-xs"><a href="{% url 'view_loan_staff' loan.ref %}" class="text-primary">{{ loan.ref }}</a></h6>
+                          </div>
+                      </div>
+                  </TD>
+                  <TD>
+                    <a href="{% url 'view_member' loan.owner.id %}">
+                      <span class="text-xs font-weight-bold">{{ loan.owner.first_name}} 
+                      {% if loan.owner.middle_name != None %}
+                        {{ loan.owner.middle_name}} 
+                      {% endif %} 
+                      
+                    </span>
+                    </a>
+                  </TD>
+                  <TD>
+                    <a href="{% url 'view_member' loan.owner.id %}">
+                      <span class="text-xs font-weight-bold">
+                      {{ loan.owner.last_name}}
+                      </span>
+                    </a>
+                  </TD>
+                  <TD>
+                    <span class="text-xs font-weight-bold">{{ loan.loan_type }}</span>
+                  </TD>
+                  <TD>
+                    <p class="text-xs font-weight-bold mb-0">{{ loan.amount|default_if_none:"0"|floatformat:2|intcomma }}</p>
+                  </TD>
+                  
+                  <TD>
+                    <span class="text-xs font-weight-bold">{{ loan.repayment_amount|default_if_none:"0"|floatformat:2|intcomma }}</span>
+                  </TD>
+                  <TD>
+                    <span class="text-xs font-weight-bold">{{ loan.number_of_fortnights }}</span>
+                  </TD>
+                  
+                  
+                  <TD class="align-middle text-xs">
+                   <span class="badge badge-sm bg-gradient-{% if loan.status == 'RUNNING' %}success{% elif loan.status == 'DEFAULTED' %}danger{% else %}info{% endif %}">{{ loan.status }}</span>
+                  </TD>
+                  
+                
+                </tr>
+                {% endfor %}
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- TABLE ENDS -->
+
+          <hr class="dark horizontal">
+          <div class="d-flex ">
+            <i class="material-icons text-sm my-auto me-1">schedule</i>
+            <p class="mb-0 text-sm"> Total Pending Applications: <span class="text-primary"><a href="{% url 'userloans_pending' %}" target="_blank">{{ pending_loans_count }}</a></span> Applications</p>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    
+      <div class="col-lg-3 col-md-6 mt-4 mb-4">
+        <div class="card z-index-2 ">
+          
+  
+          <div class="card-body pb-1">
+            <!-- PENDING LOANS BREAKUP -->
+            <div class="chart">
+              <h6 class="text-primary text-sm">Pending Loans Breakup</h5>
+                <hr style="border: 1px solid blue" class="mt-1 mb-1 p-0">
+              <canvas id="loanbreakupdj" class="chart-canvas" height="100"></canvas>
+            </div><!-- PENDING LOANS BREAKUP ENDS -->
+  
+            <hr class="dark horizontal">
+            
+              <p>View all <a style="color:blue;" href="{% url 'userloans_pending' %}" target="_blank">Pending Loan Applications</a></p>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mt-4 mb-4">
+        <div class="card z-index-2 ">
+          
+  
+          <div class="card-body pb-1">
+            <!-- PENDING LOANS BREAKUP -->
+            <div class="chart">
+              <h6 class="text-primary text-sm">Running Loans Breakup</h5>
+                <hr style="border: 1px solid blue" class="mt-1 mb-1 p-0">
+              <canvas id="runningloanbreakupdj" class="chart-canvas" height="100"></canvas>
+            </div><!-- PENDING LOANS BREAKUP ENDS -->
+  
+            <hr class="dark horizontal">
+            
+              <p>View all <a style="color:blue;" href="{% url 'userloans_all' %}" target="_blank">Running Loans</a></p>
+            
+          </div>
+        </div>
+      </div>
+
+
+      
+
+
+     
+   
+   
+  </div>
+  
+
+
+
+  <!-- Content Ends Here -->
+  
+
+ 
+{% endblock %}
+
+
+
+{% block scripts %}
+
+<script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'DataTables/jquery360.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'DataTables/pdfmake.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'DataTables/pdfmake_vfsfonts.min.js' %}"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable({
+      dom: 'B<"clear">lfrtip',
+      buttons: {
+        name: 'primary',
+        buttons: [ 'copy', 'csv', 'excel', 'pdf' ]
+      }
+    });
+  });
+</script>
+
+<!-- CHART JS -->
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js" integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script -->
+<script src="{% static 'thirdparty/js/chartjs.min.js' %}"></script>
+
+
+<!--script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script-->
+
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  
+  <!-- CHART JS -->
+
+
+<script>
+  const lb_data = {
+    labels: {{ pendingloanlabels|safe }},
+    datasets: [{
+      label: 'Loan Breakup',
+      //data: [{{ awaiting_tc_loans }},{{ under_review_loans }} ,{{ on_hold_loans }},{{ approved_loans }}, {{ funding_loans }}],
+      data: {{ pendingloansdata|safe }},
+      backgroundColor: [
+        'rgb(25, 123, 252)',
+        'rgb(252, 40, 252)',
+        'rgb(255, 192, 35)',
+        'rgb(8, 214, 8)',
+        'rgb(23, 114, 80)',
+
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+ 
+
+  const options15 = {
+    plugins: {
+      legend: {
+        labels:{
+              boxWidth: 10,
+        }
+      }
+    }
+  }
+
+  const lb_config = {
+    type: 'doughnut',
+    data: lb_data,
+    options: options15,
+  };
+
+  const loanbreakupdj = new Chart(
+    document.getElementById('loanbreakupdj'),
+    lb_config
+  );
+
+</script>
+
+<script>
+  const rlb_data = {
+    labels: {{ arfloanslabels|safe }},
+    datasets: [{
+      label: 'Running Loan Breakup',
+      //data: [{{ awaiting_tc_loans }},{{ under_review_loans }} ,{{ on_hold_loans }},{{ approved_loans }}, {{ funding_loans }}],
+      data: {{ arfloansdata|safe }},
+      backgroundColor: [
+        'rgb(20, 255, 20)',
+        'rgb(255, 0, 0)',
+        'rgb(255, 192, 35)',
+        'rgb(0, 0, 0)',
+
+      ],
+      hoverOffset: 4
+    }]
+  };
+  
+
+  const options16 = {
+    plugins: {
+      legend: {
+        labels:{
+              boxWidth: 10,
+        }
+      }
+    }
+  }
+
+  const rlb_config = {
+    type: 'pie',
+    data: rlb_data,
+    options: options16,
+  };
+
+  const runningloanbreakupdj = new Chart(
+    document.getElementById('runningloanbreakupdj'),
+    rlb_config
+  );
+
+</script>
+
+{% endblock %}

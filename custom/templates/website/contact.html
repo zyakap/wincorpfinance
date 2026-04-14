@@ -1,0 +1,33 @@
+{% extends "website/website_base.html" %}
+{% load static %}
+
+
+{% block title %} Contact {% endblock %}
+
+{% block page_title %} Contact {% endblock %}
+{% block breadcrumb %}Home{% endblock %}
+{% block breadcrumb_active %} Contact {% endblock %}
+
+{% block content %} 
+
+
+<div class="row">
+    <div class="container p-2">
+        <div class="row bg-light">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card">
+                    <img src="{% static 'website/imgs/dashboard_reports.png' %}" width="100%">
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="container">
+                    <p class="display-3 pt-5 pb-1 pr-5 pl-5">Shoot us an email at <span class="text-primary">sales@webmasta.com.pg</span>.</p> 
+                    <p class="display-3 pt-5 pb-1 pr-5 pl-5">WhatsApp <span class="text-primary">78222774</span>.</p> 
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

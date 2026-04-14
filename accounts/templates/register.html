@@ -1,0 +1,101 @@
+{% extends "website/website_base.html" %}
+
+{% load static %}
+
+
+{% block title %} REGISTER {% endblock %}
+
+
+
+{% block custom_css %}
+<style>
+
+  label {
+    margin-top: 10px;
+ 
+    display: block;
+    width: 100%;
+   
+  }
+
+  .btn {
+    margin-top: 10px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  ul.errorlist {
+    color: #ff0000;
+  }
+    
+</style>
+
+{% endblock custom_css %}
+
+{% block page_title %} Register {% endblock %}
+{% block breadcrumb %}Home{% endblock %}
+{% block breadcrumb_active %} Register {% endblock %}
+
+{% block content %}
+
+<!-- HERO
+    ================================================== -->
+    <section class="banner-area py-7">
+      <!-- Content -->
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-6 mb-3">
+              <div class="card">
+                  <div class="card-header">
+                    <h5 class="m-0">REGISTER</h5>
+                  </div>
+                  <div class="card-body">
+          
+                    <form method="post">
+                      {% csrf_token %}
+                      
+                      {{ form }}
+          
+                      {% if form.captcha.errors %}
+                        <div class="error">{{ form.captcha.errors }}</div>
+                      {% endif %}
+                      {{ form.recaptcha }}  <!-- Render the reCAPTCHA widget -->
+          
+                      <br>
+                      <button type="submit" class="btn btn-success btn-sm">REGISTER</button>
+                    </form>
+                    <br>
+                    <p>Already registered? <a href="{% url 'login_user' %}">LOGIN</a>
+          
+                  </div>
+                </div>
+            </div>
+            <!-- /.col-md-6 -->
+            <div class="col-lg-6 mb-3">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                  <h5 class="m-0">INSTRUCTIONS</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Once you click register, an <em>Activation Link</em> will be sent to your email address. Please check your email and click on the link to complete your registration.</p>
+                  <p>Do not forget to check in your 'Spam' or 'Junk' folder if the email is not found in your inbox.</p>
+                  <p>Once this process is completed, your account will be active and you will login to your dashboard.</p>
+          
+                </div>
+              </div>
+            </div>
+            <!-- /.col-md-6 -->
+          </div> <!-- / .row -->
+      </div> <!-- / .container -->
+  </section>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+
+
+{% endblock %}
