@@ -1,22 +1,51 @@
-"""
-URL configuration for wincorp project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# Media Storage to be served locally
+from django.conf import settings
+from django.conf.urls.static import static
+# others
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
+
+from custom.views import home, about, contact, clients, dcc, demo, how_to_videos
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+
+    path('appadmin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')), 
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('admin/', include('admin1.urls')),
+    path('staff/', include('staff.urls')),
+    path('loan/', include('loan.urls')),
+    path('message/', include('message.urls')),
+    path('support/', include('support.urls')),
+    path('custom/', include('custom.urls')),
+    path('API/', include('api.urls')),
+    path('report/', include('report.urls')),
+    path('dcc/', include('dcc.urls')),
+
+    #website url paths
+    re_path(r'^$', home, name='home'),
+    path('about/', about, name='about'),
+    path('contact/', contact, name='contact'),
+    path('clients/', clients, name='clients'),
+    path('dcc/', dcc, name='dcc'),
+    path('demo/', demo, name='demo'),
+    path('how-to-videos/', how_to_videos, name='how_to_videos'),
+
+    
+    
+    
+    #Django Jet Admin
+    #path('jet/', include('jet.urls', 'jet')),
+    #path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
 ]
+
+# Media Storage to be served locally
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+    
+
+
+
