@@ -273,7 +273,7 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 #Static Settings
 STATIC_URL = '/static/'
-STATIC_ROOT = '/root/wincorpfinance/static/'  #activate when on server environment
+STATIC_ROOT = '/root/wincorp/static/'  #activate when on server environment
 #STATIC_ROOT = 'static'   #comment out when on server
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_files'),
