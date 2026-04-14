@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['wincorpfinance.com.pg','www.wincorpfinance.com.pg']
 SITE_NAME = 'WINCORP FINANCE'
 DOMAIN = 'https://www.wincorpfinance.com.pg' # this will reduce the Sites framework db call.
 DOMAIN_DNS = 'wincorpfinance.com.pg'  #used here  email = f'{random_email}@{settings.DOMAIN_DNS}' in staff.views.py
-PREFIX = 'EIF' # prefix for all the E-Intfinance generated codes
+PREFIX = 'WCF' # prefix for all the E-Intfinance generated codes
 
 MAIN_COLOR = '#6bb10d' #A751A7 #change out #3bd671   #website color was this: #1acc8d #040677
 
@@ -48,12 +48,12 @@ TEST_RECEIVER = 'admin@wincorpfinance.com.pg' # development TEST admin to receiv
 TEST_USER = 'admin@wincorpfinance.com.pg' #TEST user to receive notifications
 
 #DCC
-LUID = 'EIF55XG608'
+LUID = 'WCF55XG608'
 DCC_PROFILE_ID = 9
 DCC_ENDPOINT = 'www.dc.com.pg'
 
 #Public Service Deduction Code
-ALESCO_DC = 'EIFCD'
+ALESCO_DC = 'WCFCD'
 COMPANY_NAME = 'WINCORP FINANCE'
 LOAN_TYPES = 1
 
@@ -190,7 +190,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-ROOT_URLCONF = 'wincorpfinance.urls'
+ROOT_URLCONF = 'wincorp.urls'
 
 TEMPLATES = [
     {
@@ -207,7 +207,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'wincorpfinance.wsgi.application'
+WSGI_APPLICATION = 'wincorp.wsgi.application'
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
