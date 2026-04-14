@@ -156,7 +156,7 @@ INSTALLED_APPS = [
     'django_recaptcha',
     'ckeditor',
     'ckeditor_uploader',
-    'wkhtmltopdf',
+    'django_wkhtmltopdf',
     'crispy_forms',
     'crispy_bootstrap5',  # Forgetting this was probably your error
     'fontawesomefree',
