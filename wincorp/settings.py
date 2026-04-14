@@ -29,13 +29,13 @@ SECRET_KEY = 'django-insecure-^-j1i)*(_82lzp7x0ywh^i99ufeis5$y)g+v$y)s4o)dy_+b1y
 DEBUG = True
 
 #change in production environment for ip and domain(s)
-ALLOWED_HOSTS = ['wincorpfinance.com.pg','www.wincorpfinance.com.pg']
+ALLOWED_HOSTS = ['wincorpfinance.com.pg','www.wincorpfinance.com.pg','45.77.237.180',]
 
 
 #site settings
 SITE_NAME = 'WINCORP FINANCE'
-DOMAIN = 'https://www.wincorpfinance.com.pg' # this will reduce the Sites framework db call.
-DOMAIN_DNS = 'wincorpfinance.com.pg'  #used here  email = f'{random_email}@{settings.DOMAIN_DNS}' in staff.views.py
+DOMAIN = 'http://45.77.237.180' # this will reduce the Sites framework db call.
+DOMAIN_DNS = '45.77.237.180'  #used here  email = f'{random_email}@{settings.DOMAIN_DNS}' in staff.views.py
 PREFIX = 'WCF' # prefix for all the E-Intfinance generated codes
 
 MAIN_COLOR = '#6bb10d' #A751A7 #change out #3bd671   #website color was this: #1acc8d #040677
