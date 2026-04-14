@@ -1,9 +1,9 @@
 import os
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eintfinance.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wincorp.settings')
 
-celery = Celery('eintfinance')
+celery = Celery('wincorp')
 celery.config_from_object('django.conf:settings', namespace='CELERY')
 celery.autodiscover_tasks()
 
