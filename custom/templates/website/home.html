@@ -1,224 +1,237 @@
+{% extends "website/website_base.html" %}
 {% load static %}
-{% load humanize %}
-{% load site_filter %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="E-INT Finance Limited - Digital lending solutions for fast, reliable, and accessible financing." />
-  <title>E-INT Finance | Digital Lending Solution</title>
-  <!-- Favicons -->
-  <link href="{% static 'clientfiles/favicon.png' %}" rel="icon">
-  <link href="{% static 'clientfiles/favicon.png' %}" rel="apple-touch-icon">
+{% block title %}WINCORP FINANCE | Modern Finance Access{% endblock %}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-    <!-- Main CSS File -->
-  <link href="{% static 'website/style.css' %}" rel="stylesheet">
-</head>
-<body>
-  <header class="site-header" id="top">
-    <div class="container nav">
-      <a href="#top" class="brand">E-INT Finance</a>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#benefits">Benefits</a>
-        <a href="#contact">Contact</a>
-        <a class="green-btn" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
-        <a class="blue-btn" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
-      </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+{% block content %}
+  <section class="hero section">
+    <div class="hero-grid">
+      <div class="hero-copy panel">
+        <span class="eyebrow">Modern Finance Experience</span>
+        <h1>Professional finance access designed for clarity, speed, and confidence.</h1>
+        <p>
+          WINCORP FINANCE LIMITED presents a refined one-page digital front door for clients
+          who need a credible, streamlined path into registration, account login, and company
+          information.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+          <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Client Login</a>
+          <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
+        </div>
+        <div class="hero-highlights">
+          <div class="pill">
+            <strong>One-page journey</strong>
+            <span>Everything important is surfaced in a single, modern flow.</span>
+          </div>
+          <div class="pill">
+            <strong>Professional presence</strong>
+            <span>A sharper brand experience aligned to WINCORP’s visual identity.</span>
+          </div>
+          <div class="pill">
+            <strong>App-ready access</strong>
+            <span>Registration and login links remain connected to the Django app.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-visual panel" aria-label="WINCORP FINANCE overview">
+        <div class="hero-logo-shell">
+          <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="WINCORP FINANCE LIMITED logo" />
+        </div>
+        <div>
+          <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Brand Position</span>
+          <h3 style="margin:0.8rem 0 0.7rem; font-size: 1.7rem;">Sleek, credible, and client-focused.</h3>
+          <p style="margin:0; color: rgba(255,255,255,0.82); line-height:1.75;">
+            The new homepage centers the logo, profile, and account-entry actions while
+            giving WINCORP FINANCE a cleaner and more contemporary presentation.
+          </p>
+        </div>
+      </aside>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">DIGITAL LENDING SOLUTION</span>
-          <h1>Fast, flexible finance built for modern customers.</h1>
-          <p>
-            E-INT Finance Limited delivers accessible lending solutions with a digital-first
-            experience designed for speed, convenience, and trust.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
-            <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
-            <a class="btn btn-secondary" href="#services">View Services</a>
-          </div>
-          <div class="contact-strip">
-            <span>📞 83631700</span>
-            <span>✉ info@eintfinance.com</span>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="logo-card">
-            <img src="{% static 'clientfiles/imgs/logo.png' %}" alt="E-INT Finance Limited Logo" />
-          </div>
-        </div>
+  <section class="section">
+    <div class="stat-grid">
+      <div class="stat">
+        <strong>Refined first impression</strong>
+        <span>Modern layout, stronger typography, and a premium color system based on the existing logo.</span>
       </div>
-    </section>
-
-    <section class="stats">
-      <div class="container stats-grid">
-        <article class="stat-card">
-          <h3>Quick Processing</h3>
-          <p>Applications reviewed with a streamlined digital workflow.</p>
-        </article>
-        <article class="stat-card">
-          <h3>Trusted Service</h3>
-          <p>Professional finance support focused on customer confidence.</p>
-        </article>
-        <article class="stat-card">
-          <h3>Accessible Lending</h3>
-          <p>Practical solutions tailored to real financial needs.</p>
-        </article>
+      <div class="stat">
+        <strong>Clear service discovery</strong>
+        <span>Structured sections help visitors understand the business quickly without leaving the page.</span>
       </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="container two-col">
-        <div>
-          <p class="section-label">About Us</p>
-          <h2>Your reliable partner in digital finance.</h2>
-        </div>
-        <div>
-          <p>
-            E-INT Finance Limited is positioned to provide fast and dependable financing
-            services through a modern digital lending model. Our goal is to simplify access
-            to funding and deliver a smooth customer experience from application to approval.
-          </p>
-          <p>
-            With a strong emphasis on efficiency, transparency, and convenience, we help
-            individuals and businesses engage with finance in a smarter way.
-          </p>
-        </div>
+      <div class="stat">
+        <strong>Confident navigation</strong>
+        <span>Core website routes still exist, while the main experience is anchored into a single homepage.</span>
       </div>
-    </section>
-
-    <section class="section alt" id="services">
-      <div class="container">
-        <p class="section-label center">Our Services</p>
-        <h2 class="center">Finance services designed for speed and simplicity.</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Personal Loans</h3>
-            <p>Flexible financing options for urgent and planned personal needs.</p>
-          </article>
-          <article class="card">
-            <h3>Business Support</h3>
-            <p>Practical funding solutions to support operations and business growth.</p>
-          </article>
-          <article class="card">
-            <h3>Digital Applications</h3>
-            <p>Convenient online application processes that save time and reduce delays.</p>
-          </article>
-          <article class="card">
-            <h3>Customer Assistance</h3>
-            <p>Friendly support to guide applicants through each stage of the process.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="benefits">
-      <div class="container">
-        <p class="section-label center">Why Choose Us</p>
-        <h2 class="center">Simple, responsive, and customer-focused.</h2>
-        <div class="benefits-grid">
-          <div class="benefit">
-            <span class="icon">✓</span>
-            <div>
-              <h3>Fast Response</h3>
-              <p>We prioritize efficient communication and timely processing.</p>
-            </div>
-          </div>
-          <div class="benefit">
-            <span class="icon">✓</span>
-            <div>
-              <h3>Digital Convenience</h3>
-              <p>Modern tools make it easier to access and manage financing services.</p>
-            </div>
-          </div>
-          <div class="benefit">
-            <span class="icon">✓</span>
-            <div>
-              <h3>Professional Support</h3>
-              <p>Our team is committed to clear guidance and dependable service delivery.</p>
-            </div>
-          </div>
-          <div class="benefit">
-            <span class="icon">✓</span>
-            <div>
-              <h3>Customer Trust</h3>
-              <p>We aim to build long-term relationships through transparency and care.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cta">
-      <div class="container cta-box">
-        <div>
-          <p class="section-label">Start Today</p>
-          <h2>Need finance support? Let’s talk.</h2>
-          <p>Contact E-INT Finance Limited to learn more about our digital lending solutions.</p>
-        </div>
-        <a class="btn btn-primary" href="#contact">Contact Us</a>
-      </div>
-    </section>
-
-    <section class="section alt" id="contact">
-      <div class="container contact-grid">
-        <div>
-          <p class="section-label">Contact</p>
-          <h2>Get in touch with us.</h2>
-          <p>We’re ready to help you with your lending and finance enquiries.</p>
-
-          <div class="contact-list">
-            <div><strong>Phone:</strong> 83631700</div>
-            <div><strong>Email:</strong> info@eintfinance.com</div>
-            <div><strong>Company:</strong> E-INT Finance Limited</div>
-            <div><strong>Service:</strong> Digital Lending Solution</div>
-          </div>
-        </div>
-
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Your full name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="you@example.com" required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary full">Send Enquiry</button>
-          <p class="form-note" id="formNote"></p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-wrap">
-      <p>© <span id="year"></span> E-INT Finance Limited. All rights reserved.</p>
-      <a href="#top">Back to top</a>
     </div>
-  </footer>
+  </section>
 
- 
-  <!-- Main JS File -->
-  <script src="{% static 'website/script.js' %}"></script>
-</body>
-</html>
+  <section class="section" id="about">
+    <div class="split-grid">
+      <div class="copy-block panel">
+        <div class="section-heading">
+          <span class="eyebrow">About WINCORP</span>
+          <h2>A polished digital presence for a serious finance business.</h2>
+        </div>
+        <p>
+          This redesigned homepage positions WINCORP FINANCE LIMITED as a modern and dependable
+          finance brand, with messaging that stays professional and broad while highlighting
+          accessibility, efficiency, and client confidence.
+        </p>
+        <p style="margin-top: 1rem;">
+          The layout is intentionally concise: it introduces the company, frames the value
+          proposition, points visitors toward the business profile, and keeps the most important
+          client actions immediately visible.
+        </p>
+      </div>
+
+      <div class="copy-block panel">
+        <h3>Built around practical visitor needs</h3>
+        <p>
+          Instead of scattering information across multiple disconnected pages, the homepage now
+          acts as the primary presentation layer for WINCORP. Visitors can learn about the company,
+          understand the flow, and move straight into the application portal.
+        </p>
+        <div class="hero-actions" style="margin-top: 1.2rem;">
+          <a class="btn btn-secondary" href="{% url 'about' %}">About Page</a>
+          <a class="btn btn-secondary" href="{% url 'contact' %}">Contact Page</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="solutions">
+    <div class="section-heading">
+      <span class="eyebrow">Key Sections</span>
+      <h2>A one-page structure that stays sleek without losing substance.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="card">
+        <h3>Company Overview</h3>
+        <p>The opening section establishes WINCORP FINANCE with a stronger, more premium visual identity.</p>
+      </article>
+      <article class="card">
+        <h3>Profile Access</h3>
+        <p>The business profile is surfaced as a primary call-to-action so visitors can review formal company material easily.</p>
+      </article>
+      <article class="card">
+        <h3>Client Onboarding</h3>
+        <p>Registration remains prominent for new users entering the Django application flow.</p>
+      </article>
+      <article class="card">
+        <h3>Returning User Access</h3>
+        <p>Login remains front and center for existing customers who need immediate portal access.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="section-heading">
+      <span class="eyebrow">Simple Journey</span>
+      <h2>A clearer path from first visit to account access.</h2>
+    </div>
+    <div class="timeline">
+      <article class="timeline-card">
+        <h3>Discover</h3>
+        <p>Visitors land on one focused page that introduces the company and the available next steps.</p>
+      </article>
+      <article class="timeline-card">
+        <h3>Review</h3>
+        <p>The business profile is available directly from the homepage for quick company reference.</p>
+      </article>
+      <article class="timeline-card">
+        <h3>Register</h3>
+        <p>New clients can move straight into the existing registration route without any URL changes.</p>
+      </article>
+      <article class="timeline-card">
+        <h3>Login</h3>
+        <p>Returning users can access the existing portal immediately through the preserved login route.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <span class="eyebrow">Why This Works</span>
+      <h2>Sharper presentation, less friction, and cleaner continuity across the website.</h2>
+    </div>
+    <div class="metrics-grid">
+      <article class="metric">
+        <h3>Brand-led design</h3>
+        <p>The plum and amber palette comes directly from the WINCORP logo for stronger visual consistency.</p>
+      </article>
+      <article class="metric">
+        <h3>Professional restraint</h3>
+        <p>The copy avoids unsupported claims while still presenting the company with confidence and credibility.</p>
+      </article>
+      <article class="metric">
+        <h3>Route-safe refresh</h3>
+        <p>The underlying Django URL links for registration, login, and website pages are maintained.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="profile">
+    <div class="profile-card">
+      <div class="profile-logo">
+        <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="WINCORP FINANCE logo" />
+      </div>
+      <div>
+        <span class="eyebrow">Company Profile</span>
+        <h3>Keep the official profile close to the homepage experience.</h3>
+        <p>
+          The homepage now includes direct access to the attached WINCORP FINANCE business profile
+          so visitors can move from visual impression to formal company material in one click.
+        </p>
+        <div class="hero-actions" style="margin-top: 1.1rem;">
+          <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Open Business Profile</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="cta-card">
+      <div>
+        <span class="eyebrow" style="color: rgba(255,255,255,0.85);">Client Access</span>
+        <h3 style="margin-top:0.8rem; font-size: clamp(1.8rem, 3vw, 2.5rem);">Ready to continue with WINCORP FINANCE?</h3>
+        <p>
+          Move directly into the application portal, review the company profile, or use the supporting
+          website pages for additional context.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-accent" href="{% url 'register' %}" target="_blank" rel="noopener">Create Account</a>
+        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Portal Login</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="route-grid">
+      <article class="route-card">
+        <h3>About</h3>
+        <p>Additional company context and a clean bridge back to the homepage.</p>
+        <div class="hero-actions" style="margin-top: 1rem;">
+          <a class="btn btn-secondary" href="{% url 'about' %}">Visit About</a>
+        </div>
+      </article>
+      <article class="route-card">
+        <h3>Contact</h3>
+        <p>A dedicated access page for company profile, registration, and login routes.</p>
+        <div class="hero-actions" style="margin-top: 1rem;">
+          <a class="btn btn-secondary" href="{% url 'contact' %}">Visit Contact</a>
+        </div>
+      </article>
+      <article class="route-card">
+        <h3>Support Pages</h3>
+        <p>Legacy website routes remain available in a cleaner, branded presentation.</p>
+        <div class="hero-actions" style="margin-top: 1rem;">
+          <a class="btn btn-secondary" href="{% url 'clients' %}">Client Access</a>
+        </div>
+      </article>
+    </div>
+  </section>
+{% endblock %}

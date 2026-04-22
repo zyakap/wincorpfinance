@@ -1,118 +1,21 @@
 {% extends "website/website_base.html" %}
-{% load static %}
 
+{% block title %}Client Access | WINCORP FINANCE{% endblock %}
 
-{% block title %} Clients {% endblock %}
-
-{% block page_title %} Clients {% endblock %}
-{% block breadcrumb %}Home{% endblock %}
-{% block breadcrumb_active %} Clients {% endblock %}
-
-{% block content %} 
-
-
-
-    <div class="container p-2">
-        <h2 class="mt-3 pt-3 pb-3 mb-3">Companies that power their business with LoanMasta</h2>
-        <hr>
-        <div class="row my-2">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row bg-light shadow py-2 my-2 bg-white rounded mx-1">
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <img src="{% static 'website/imgs/clients/client-1.png' %}" width="100%">
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">
-                        <div class="container">
-                            <h3 class="">Instabuxx Finance</h3>
-                            <h4><span class="text-primary">www.instabuxx.com</span></h4>
-                            <p class="">PayDay Loans | Lender Platform | <span class="text-primary">78222774</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row bg-light shadow py-2 my-2 bg-white rounded mx-1">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <img src="{% static 'website/imgs/clients/client-3.png' %}" width="100%">
-                    </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
-                        <div class="container">
-                            <h3 class="">Horivert Finance</h3>
-                            <h4><span class="text-primary">www.horivertfinance.com</span>.</h4> 
-                            <p class="">Personal Loans | SME Loans | <span class="text-primary">78222774</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row my-2">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row bg-light shadow py-2 my-2 bg-white rounded mx-1">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <img src="{% static 'website/imgs/clients/client-7.png' %}" width="100%">
-                    </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
-                        <div class="container">
-                            <h3 class="">PNG No.1 SME</h3>
-                            <h4><span class="text-primary">www.png1sme.com</span>.</h4> 
-                            <p class="">SME Training | SME Loans | <span class="text-primary">78222774</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row bg-light shadow py-2 my-2 bg-white rounded mx-1">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <img src="{% static 'website/imgs/clients/client-9.png' %}" width="100%">
-                    </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
-                        <div class="container">
-                            <h3 class="">KTP Finance</h3>
-                            <h4><span class="text-primary">www.ktpfinance.com</span>.</h4>
-                            <p class="">Personal Loans | <span class="text-primary">78222774</span></p> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row my-2">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row bg-light shadow py-2 my-2 bg-white rounded mx-1">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <img src="{% static 'website/imgs/clients/client-4.png' %}" width="100%">
-                    </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
-                        <div class="container">
-                            <h3 class="">MIWAN Finance</h3>
-                            <h4><span class="text-primary">www.miwan.com.pg</span>.</h4> 
-                            <p class="">SME Training | PayDay Loans | Personal Loans | SME Loans | <span class="text-primary">78222774</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row bg-light shadow py-2 my-2 bg-white rounded mx-1">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <img src="{% static 'website/imgs/clients/client-6.png' %}" width="100%">
-                    </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
-                        <div class="container">
-                            <h3 class="">TruPNG Finance</h3>
-                            <h4><span class="text-primary">www.trupngfinance.com.pg</span>.</h4> 
-                            <p class="">PayDay Loans | Personal Loans | <span class="text-primary">78222774</span></p> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+{% block content %}
+  <section class="section">
+    <div class="page-hero panel">
+      <span class="eyebrow">Client Access</span>
+      <h1>Fast entry points for new and returning users.</h1>
+      <p>
+        This page remains available as part of the existing route structure while the main
+        website experience now lives on the one-page homepage.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Create Account</a>
+        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Portal Login</a>
+        <a class="btn btn-secondary" href="{% url 'home' %}">Homepage</a>
+      </div>
     </div>
-
-
+  </section>
 {% endblock %}

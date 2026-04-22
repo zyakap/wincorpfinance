@@ -1,213 +1,41 @@
 {% extends "website/website_base.html" %}
 {% load static %}
 
-{% block title %} About {% endblock %}
+{% block title %}About | WINCORP FINANCE{% endblock %}
 
-{% block page_title %} About {% endblock %}
-{% block breadcrumb %}Home{% endblock %}
-{% block breadcrumb_active %} About {% endblock %}
-
-{% block content %} 
-
-
-<div class="row">
-    <div class="container bg-light p-2">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="container pt-5 pb-5">
-                    <h2 class="mb-4">LoanMasta - Automated Loans Management Software - Online on any Device</h2>
-                
-                    <div class="row mb-4">
-                        
-                        <div class="col-md-6">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    
-                                    <div class="carousel-item active">
-                                        <img src="{% static 'website/imgs/about_banner.png' %}" class="d-block w-100" alt="...">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h5 class="text-justify p-2">LoanMasta is a fully automated software that revolutionizes 
-                                the entire lending and management process, making it smarter and 
-                                more efficient. Customize it to meet your needs and experience seamless lending management.</h5>
-                            <div class="">
-                                <a href="https://www.loanmasta.com/demo/" class="btn btn-lg btn-primary mt-1">Try the Demo</a>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="row mb-4 pt-3">
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">Automated Processes</h5>
-                                    <p class="card-text">Eliminate paper applications, manual communication, and office rental costs. Automate reminders, follow-ups, and interest calculations.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">Online Convenience</h5>
-                                    <p class="card-text">Manage your finance company entirely online via phone, tablet, or computer. Customers can apply, inquire, and receive updates from anywhere.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">Automated Credit Management</h5>
-                                    <p class="card-text">Vet customers with our Dinau Control Center (DCC), a more affordable and automated alternative to Credit & Data Bureau (CDB).</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="row mt-5 bg-secondary pb-3">
-                        <div class="col-md-12">
-                            <h3 class="mb-3 pt-5 text-light">Loan Application Process</h3>
-                            <div class="list-group">
-                                <div class="list-group-item">Customer visits your website for information.</div>
-                                <div class="list-group-item">Customer registers and completes personal information.</div>
-                                <div class="list-group-item">Account activation after vetting, ensuring good credit ratings.</div>
-                                <div class="list-group-item">Customers apply with a click and follow the software's guidance.</div>
-                                <div class="list-group-item">LoanMasta performs automated loan requirements checks.</div>
-                                <div class="list-group-item">Loan decision (Approve or Decline) is made, and customers are notified automatically.</div>
-                                <div class="list-group-item">Approved loans are moved to a funding list, and alerts are sent for further funding decisions.</div>
-                                <div class="list-group-item">Once funded, the loan becomes a running loan in the system.</div>
-                                <div class="list-group-item">All document uploads are automatically labeled and filed.</div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="row mb-4 pt-5 pb-5">
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <h3 class="text-center mb-3">Running Loans Management</h3>
-                                </div>
-                                <div class="card-body">
-                                    <p>LoanMasta ensures seamless management of running loans with automated reminders, updates, and default notices. 
-                                    Customers can view and download their loan statements, and staff can upload bank statements to update repayments.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <h3 class="text-center mb-3">Automated Reports & Support</h3>
-                                </div>
-                                <div class="card-body">
-                                    <p>LoanMasta generates automated reports and provides a support ticket system to handle customer queries efficiently. Focus on your core business while LoanMasta handles the rest.</p>
-                        
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <h3 class="text-center mb-3">Success Story</h3>
-                                </div>
-                                <div class="card-body">
-                                    <p>A female entrepreneur started her own finance company with LoanMasta. She paid a one-time setup fee and engaged us to manage and run it for her. Despite her busy schedule, she successfully runs her business nationwide with minimal effort, thanks to LoanMasta’s automated processes.</p>
-                        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4 pt-5 pb-5 bg-primary">
-                        <h1 class="text-light text-center">Fees for using Software</h1>
-                        <div class="col-lg-6 col-md-6">
-                            
-                            <div class="card h-100 mt-3 p-3">
-                                <h2 class="text-dark">Software Subscription Cost </h2>
-                                <div class="p-2">
-                                    <h4 class="text-primary">One-time Customization & Setup Fee: <b>K5,500.00</b></h4>
-                                    <p>This covers:<br>
-                                        <b>DOMAIN (except .pg)</b><br>
-                                        <b>FULL WEBSITE</b><br>
-                                        <b>Email Accounts</b><br>
-                                        <b>Software Server</b><br>
-                                        <b>Software Customization</b><br>
-                                        <b>Database Setup</b><br>
-                                        <b>Uploading of Existing Loans data</b><br>
-                                        <b>Membership for DCC - Logins will be supplied</b>
-                                    </p>
-                                    <h4 class="text-primary pt-3">Running Cost: <b>K150.00<span class=" text-secondary text-sm">+gst</span> per fortnight</b></h4>
-                                    <p>This covers:<br>
-                                        <b>Hosting of Website, Emails & Software - Database & Files</b><br>
-                                        <b>Maintenance & Continuous Software Improvements & Updates</b><br> 
-                                        <b>Full-time standby Support</b><br> 
-                                        <b>Continuous Training </b><br> 
-                                        <b>Data Storage & Backup</b><br> 
-                                        <b>DCC Loan & defaults data feed</b>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 text-light">
-                            <div class="card h-100 mt-3 p-3">
-                                <h2 class="text-dark">Management Services (Optional)</h2>
-                                <p class="text-dark">If you don’t have much time, We can manage everything for you.</p>
-                                <h3 class="text-primary">This is for people who have a full-time job and are usually busy during the day but want to have their finance business running on the side.</h3>
-                                <h5 class="pt-3 text-dark">We do everything. You only need to keep an eye on the funding alert email to 
-                                    fund loans and loan repayment notifications because only you will have access to your bank account.<br><br>
-                                    We will share the same admin dashboard and all email access, which means you can see everything that we are doing. 
-                                    You will know all activities of the business and all communication with your customers. We will always behave like employees of your business, doing everything on your behalf.
-                                </h5><br><br>
-                                <h5 class="text-dark pt-2">For management, we charge: K520.00<span class=" text-secondary text-sm">+gst</span> per fortnight.</h5>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="row mb-4 pt-5">
-                        <div class="col-md-12 text-center">
-                            <h2 class="text-success">Get Started with LoanMasta</h2>
-                            <h4 class="pt-3 pb-3">
-                                Start your finance company with just your phone, tablet, or laptop. Enjoy a complete business website, 
-                                unlimited email accounts, hosting, support, and maintenance at an affordable cost.
-                            </h4>
-                            
-                        </div>
-                        <a href="https://www.loanmasta.com/demo/" class="btn btn-lg btn-success mt-5">Explore the Demo</a>
-                    </div>
-                
-                </div>
-                
-
-
-                   
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                
-                <div class="container">
-                    <img src="{% static 'website/imgs/admin_dashboard.png' %}" width="100%">
-                </div>
-
-            </div>
-        </div>
+{% block content %}
+  <section class="section">
+    <div class="page-hero panel">
+      <span class="eyebrow">About</span>
+      <h1>WINCORP FINANCE with a cleaner, more focused web presence.</h1>
+      <p>
+        This page supports the redesigned homepage by giving visitors a dedicated place to
+        understand the website direction, company presentation, and next-step links without
+        breaking the existing Django route structure.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="{% url 'home' %}">Back to Homepage</a>
+        <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
+      </div>
     </div>
-</div>
+  </section>
 
+  <section class="section">
+    <div class="split-grid">
+      <article class="content-panel panel">
+        <h3>What changed</h3>
+        <p>
+          The website experience now centers around a sleek one-page homepage with stronger
+          branding, cleaner calls to action, and a more executive visual tone.
+        </p>
+      </article>
+      <article class="content-panel panel">
+        <h3>What stayed intact</h3>
+        <p>
+          Existing application URLs, including registration and login, are still preserved so
+          the redesign improves presentation without disrupting the working Django app.
+        </p>
+      </article>
+    </div>
+  </section>
 {% endblock %}

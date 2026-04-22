@@ -1,33 +1,39 @@
 {% extends "website/website_base.html" %}
 {% load static %}
 
+{% block title %}Contact | WINCORP FINANCE{% endblock %}
 
-{% block title %} Contact {% endblock %}
-
-{% block page_title %} Contact {% endblock %}
-{% block breadcrumb %}Home{% endblock %}
-{% block breadcrumb_active %} Contact {% endblock %}
-
-{% block content %} 
-
-
-<div class="row">
-    <div class="container p-2">
-        <div class="row bg-light">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="card">
-                    <img src="{% static 'website/imgs/dashboard_reports.png' %}" width="100%">
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-12">
-                <div class="container">
-                    <p class="display-3 pt-5 pb-1 pr-5 pl-5">Shoot us an email at <span class="text-primary">sales@webmasta.com.pg</span>.</p> 
-                    <p class="display-3 pt-5 pb-1 pr-5 pl-5">WhatsApp <span class="text-primary">78222774</span>.</p> 
-                </div>
-            </div>
-        </div>
-        
+{% block content %}
+  <section class="section">
+    <div class="page-hero panel">
+      <span class="eyebrow">Contact And Access</span>
+      <h1>Use the official WINCORP routes to continue.</h1>
+      <p>
+        This contact page keeps access simple: review the company profile, create an account,
+        or sign in to the existing portal through the preserved Django links.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+        <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
+      </div>
     </div>
-</div>
+  </section>
 
+  <section class="section">
+    <div class="metrics-grid">
+      <article class="metric">
+        <h3>New clients</h3>
+        <p>Start with the registration link to enter the existing account creation flow.</p>
+      </article>
+      <article class="metric">
+        <h3>Returning clients</h3>
+        <p>Use the login route for direct access to the current WINCORP application portal.</p>
+      </article>
+      <article class="metric">
+        <h3>Company information</h3>
+        <p>Open the official business profile for supporting company material and presentation context.</p>
+      </article>
+    </div>
+  </section>
 {% endblock %}

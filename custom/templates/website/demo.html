@@ -1,120 +1,21 @@
 {% extends "website/website_base.html" %}
-{% load static %}
 
-{% block title %}  Demo Details {% endblock %}
+{% block title %}Demo | WINCORP FINANCE{% endblock %}
 
-{% block page_title %}  Demo Details {% endblock %}
-{% block breadcrumb %}Home{% endblock %}
-{% block breadcrumb_active %}  Demo {% endblock %}
-
-{% block content %} 
-
-<div class="row">
-    <div class="container bg-dark p-2">
-        <div class="row bg-light">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card">
-                    <img src="{% static 'img/loan-management.png' %}">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                
-               
-
-                <div class="container">
-                    <p class=" pt-5 pb-1 pr-5 pl-5">Login in with following details:</p>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Password</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            
-                            <td>ADMIN</td>
-                            <td>testadmin@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                           
-                            <td>STAFF</td>
-                            <td>staff@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-
-                          <tr>
-                            <td>USER</td>
-                            <td>testuser@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                            <td>USER</td>
-                            <td>user100@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                            <td>USER</td>
-                            <td>user11@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                            <td>USER</td>
-                            <td>email18@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                            <td>USER</td>
-                            <td>loan44@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                            <td>USER</td>
-                            <td>customer1@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          <tr>
-                            <td>USER</td>
-                            <td>user33@loanmasta.com</td>
-                            <td>123456</td>
-                          </tr>
-                          
-                        </tbody>
-                      </table>
-
-                      <div class="mt-3 p-2">
-                        <p>To view email in those accounts, there are two options</p>
-                        <ol>
-                            <li>
-                                <p>Visit this link:
-<a href="https://cp.webhostpngcp.com:2096/" target="_blank">https://cp.webhostpngcp.com:2096/</a></p>
-<p>
-Enter any of the above email address for which you want to view emails<br>
-Enter this password: <span class="text-primary">1155Lm@webmasta</span> <br>
-This password is the same for all the email addresses above</p>
-                            </li>
-                            <li>
-                                <p>Set up email on your phone or desktop using the following settings:<br>
-
-Type: IMAP<br>
-Username: The email address<br>
-Password: 1155Lm@webmasta<br><br>
-
-Incoming Server: mail.loanmasta.com<br>
-Port: 143<br>
-
-Outgoing Server: mail.loanmasta.com<br>
-Port: 587<br>
-                            </li>
-                        </ol>
-                      </div>
-                </div>
-
-            </div>
-        </div>
+{% block content %}
+  <section class="section">
+    <div class="page-hero panel">
+      <span class="eyebrow">Demo</span>
+      <h1>The demo page has been cleaned up to keep the website presentation professional.</h1>
+      <p>
+        The old public credential-style content has been removed. Visitors are now directed back
+        to the homepage and the official account routes instead.
+      </p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="{% url 'home' %}">Homepage</a>
+        <a class="btn btn-secondary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+      </div>
     </div>
-</div>
-
+  </section>
 {% endblock %}

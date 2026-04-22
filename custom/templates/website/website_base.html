@@ -1,132 +1,766 @@
 {% load static %}
-{% load humanize %}
-{% load site_filter %}
-
-{% load static %}
-{% load humanize %}
-{% load site_filter %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="E-INT Finance Limited - Digital lending solutions for fast, reliable, and accessible financing." />
-  <title>{% block title %}{% endblock %}</title>
-  <!-- Favicons -->
-  <link href="{% static 'clientfiles/favicon.png' %}" rel="icon">
-  <link href="{% static 'clientfiles/favicon.png' %}" rel="apple-touch-icon">
+  <meta
+    name="description"
+    content="WINCORP FINANCE LIMITED delivers a modern, professional finance experience with streamlined access to online account services."
+  />
+  <title>{% block title %}WINCORP FINANCE{% endblock %}</title>
+  <link href="{% static 'clientfiles/wincorp logo.png' %}" rel="icon" />
+  <link href="{% static 'clientfiles/wincorp logo.png' %}" rel="apple-touch-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  {% block extra_head %}{% endblock %}
+  <style>
+    :root {
+      --bg: #f5f0ef;
+      --surface: rgba(255, 255, 255, 0.84);
+      --surface-strong: #ffffff;
+      --text: #1e1a1c;
+      --muted: #61585d;
+      --line: rgba(72, 33, 76, 0.12);
+      --brand: #76286d;
+      --brand-deep: #4f164b;
+      --accent: #f59d1f;
+      --accent-soft: #ffd9a3;
+      --shadow: 0 30px 70px rgba(72, 33, 76, 0.14);
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --container: 1180px;
+    }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-    <!-- Main CSS File -->
-  <link href="{% static 'website/style.css' %}" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(245, 157, 31, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(118, 40, 109, 0.18), transparent 28%),
+        linear-gradient(180deg, #fffdfc 0%, var(--bg) 50%, #fff8f1 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-shell::before,
+    .site-shell::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      z-index: -1;
+      border-radius: 999px;
+      filter: blur(12px);
+      opacity: 0.6;
+    }
+
+    .site-shell::before {
+      width: 320px;
+      height: 320px;
+      top: 90px;
+      right: -120px;
+      background: rgba(245, 157, 31, 0.22);
+    }
+
+    .site-shell::after {
+      width: 360px;
+      height: 360px;
+      bottom: 40px;
+      left: -120px;
+      background: rgba(118, 40, 109, 0.14);
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--container));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 250, 248, 0.8);
+      border-bottom: 1px solid rgba(72, 33, 76, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 82px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(118, 40, 109, 0.12), rgba(245, 157, 31, 0.2));
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(118, 40, 109, 0.08);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0.35rem;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      margin-top: 0.12rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--brand-deep);
+      background: rgba(118, 40, 109, 0.08);
+      outline: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: rgba(118, 40, 109, 0.08);
+      color: var(--brand-deep);
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      padding: 0.95rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand-deep), var(--brand));
+      box-shadow: 0 16px 30px rgba(79, 22, 75, 0.24);
+    }
+
+    .btn-secondary {
+      color: var(--brand-deep);
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(118, 40, 109, 0.12);
+    }
+
+    .btn-accent {
+      color: #2c2013;
+      background: linear-gradient(135deg, #ffd18a, var(--accent));
+      box-shadow: 0 16px 30px rgba(245, 157, 31, 0.22);
+    }
+
+    main {
+      padding: 2rem 0 3rem;
+    }
+
+    .section {
+      padding: 2.2rem 0;
+    }
+
+    .section + .section {
+      padding-top: 0.8rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 1.6rem;
+    }
+
+    .section-heading h1,
+    .section-heading h2,
+    .hero-copy h1,
+    .page-hero h1 {
+      margin: 0.7rem 0 1rem;
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+      font-size: clamp(2.5rem, 6vw, 5.1rem);
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .section-heading p,
+    .hero-copy p,
+    .page-hero p,
+    .card p,
+    .copy-block p,
+    .metric p,
+    .timeline-card p,
+    .profile-card p,
+    .cta-card p,
+    .route-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      padding-top: 1rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual,
+    .page-hero,
+    .content-panel,
+    .route-card {
+      padding: clamp(1.5rem, 3vw, 2.3rem);
+    }
+
+    .hero-copy {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 241, 0.8)),
+        linear-gradient(180deg, rgba(118, 40, 109, 0.05), transparent);
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      right: -110px;
+      top: -80px;
+      background: radial-gradient(circle, rgba(245, 157, 31, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-copy p {
+      max-width: 62ch;
+      font-size: 1.06rem;
+    }
+
+    .hero-actions,
+    .footer-links,
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.6rem;
+    }
+
+    .hero-highlights {
+      margin-top: 1.75rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .pill {
+      padding: 1rem 1rem 0.95rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(118, 40, 109, 0.08);
+    }
+
+    .pill strong,
+    .metric strong,
+    .stat strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .pill span,
+    .metric span,
+    .stat span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.94rem;
+    }
+
+    .hero-visual {
+      background:
+        linear-gradient(160deg, rgba(79, 22, 75, 0.96), rgba(118, 40, 109, 0.94)),
+        linear-gradient(180deg, rgba(245, 157, 31, 0.18), transparent);
+      color: #fff;
+      display: grid;
+      gap: 1rem;
+      align-content: space-between;
+      min-height: 100%;
+    }
+
+    .hero-logo-shell {
+      border-radius: 28px;
+      padding: 1.25rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 249, 242, 0.9));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .hero-logo-shell img {
+      width: min(100%, 330px);
+      margin: 0 auto;
+    }
+
+    .stat-grid,
+    .card-grid,
+    .timeline,
+    .metrics-grid,
+    .route-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stat,
+    .card,
+    .timeline-card,
+    .metric,
+    .profile-card,
+    .cta-card,
+    .route-card {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat,
+    .metric,
+    .timeline-card,
+    .card,
+    .profile-card,
+    .cta-card {
+      padding: 1.45rem;
+    }
+
+    .stat strong {
+      font-size: 1.15rem;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .copy-block,
+    .profile-card {
+      padding: 1.75rem;
+    }
+
+    .copy-block h3,
+    .card h3,
+    .timeline-card h3,
+    .metric h3,
+    .profile-card h3,
+    .cta-card h3,
+    .route-card h3 {
+      margin: 0 0 0.7rem;
+      font-size: 1.2rem;
+      line-height: 1.25;
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      opacity: 0.9;
+    }
+
+    .timeline {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      counter-reset: steps;
+    }
+
+    .timeline-card {
+      position: relative;
+      padding-top: 3.4rem;
+    }
+
+    .timeline-card::before {
+      counter-increment: steps;
+      content: "0" counter(steps);
+      position: absolute;
+      top: 1rem;
+      left: 1.25rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--brand);
+    }
+
+    .metrics-grid,
+    .route-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .profile-card {
+      display: grid;
+      gap: 1.2rem;
+      align-items: center;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+    }
+
+    .profile-logo {
+      padding: 1rem;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(245, 157, 31, 0.12), rgba(118, 40, 109, 0.08));
+    }
+
+    .cta-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      background:
+        linear-gradient(135deg, rgba(79, 22, 75, 0.98), rgba(118, 40, 109, 0.94)),
+        linear-gradient(180deg, rgba(245, 157, 31, 0.18), transparent);
+      color: #fff;
+    }
+
+    .cta-card p {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .page-hero {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 239, 0.86)),
+        linear-gradient(180deg, rgba(118, 40, 109, 0.06), transparent);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      max-width: 12ch;
+    }
+
+    .page-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.4rem;
+    }
+
+    .route-grid {
+      margin-top: 1rem;
+    }
+
+    .route-card {
+      min-height: 100%;
+    }
+
+    .site-footer {
+      padding: 0 0 2.2rem;
+    }
+
+    .footer-panel {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--brand);
+      outline: none;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .split-grid,
+      .profile-card,
+      .cta-card {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid,
+      .timeline,
+      .metrics-grid,
+      .route-grid,
+      .stat-grid,
+      .hero-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cta-card {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .nav {
+        position: relative;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 0.75rem);
+        left: 0;
+        right: 0;
+        padding: 0.8rem;
+        border-radius: 24px;
+        background: rgba(255, 251, 249, 0.97);
+        border: 1px solid rgba(118, 40, 109, 0.1);
+        box-shadow: var(--shadow);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a,
+      .nav-links .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .card-grid,
+      .timeline,
+      .metrics-grid,
+      .route-grid,
+      .stat-grid,
+      .hero-highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .page-hero,
+      .content-panel,
+      .route-card {
+        padding: 1.3rem;
+      }
+
+      .footer-panel {
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header" id="top">
-    <div class="container nav">
-      <a href="{% url 'home' %}" class="brand"><img src="{% static 'clientfiles/favicon.png' %}" alt=""> E-INT Finance</a>
-      <nav class="nav-links">
-        <a href="{% url 'home' %}#about">About</a>
-        <a href="{% url 'home' %}#services">Services</a>
-        <a href="{% url 'home' %}#benefits">Benefits</a>
-        <a href="{% url 'home' %}#contact">Contact</a>
-        <a class="green-btn" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
-        <a class="blue-btn" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
-      </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-    </div>
-  </header>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <div class="container nav">
+        <a href="{% url 'home' %}" class="brand" aria-label="WINCORP FINANCE home">
+          <span class="brand-mark">
+            <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="WINCORP FINANCE logo" />
+          </span>
+          <span class="brand-copy">
+            WINCORP FINANCE
+            <span>Finance Limited</span>
+          </span>
+        </a>
 
-  <main>
-    <section class="hero">
+        <nav class="nav-links" id="siteNav">
+          <a href="{% url 'home' %}#about">About</a>
+          <a href="{% url 'home' %}#solutions">Solutions</a>
+          <a href="{% url 'home' %}#process">Process</a>
+          <a href="{% url 'home' %}#profile">Profile</a>
+          <a href="{% url 'home' %}#contact">Access</a>
+          <a class="btn btn-secondary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+          <a class="btn btn-primary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+        </nav>
 
-      <div class="container" data-aos="fade-up">
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible text-black" role="alert">
-              <span class="text-md">{{ message }}</span>
-              <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                
-              </button>
-            </div>
-          {% endfor %}
-        {% endif %}
-        
-        {% block content %} 
-        {% endblock %} 
-
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       </div>
-      
-    </section>
+    </header>
 
-    
-
-   
-
-
-
-  
-
-    <section class="section cta">
-      <div class="container cta-box">
-        <div>
-          <p class="section-label">Start Today</p>
-          <h2>Need finance support? Let’s talk.</h2>
-          <p>Contact E-INT Finance Limited to learn more about our digital lending solutions.</p>
-        </div>
-        <a class="btn btn-primary" href="{% url 'home' %}#contact">Contact Us</a>
+    <main>
+      <div class="container">
+        {% block content %}{% endblock %}
       </div>
-    </section>
+    </main>
 
-    <section class="section alt" id="contact">
-      <div class="container contact-grid">
-        <div>
-          <p class="section-label">Contact</p>
-          <h2>Get in touch with us.</h2>
-          <p>We’re ready to help you with your lending and finance enquiries.</p>
-
-          <div class="contact-list">
-            <div><strong>Phone:</strong> 83631700</div>
-            <div><strong>Email:</strong> info@eintfinance.com</div>
-            <div><strong>Company:</strong> E-INT Finance Limited</div>
-            <div><strong>Service:</strong> Digital Lending Solution</div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-panel panel">
+          <p>© <span id="year"></span> WINCORP FINANCE LIMITED. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'clients' %}">Client Access</a>
+            <a href="{% url 'dcc' %}">DCC</a>
+            <a href="{% url 'demo' %}">Demo</a>
+            <a href="{% url 'how_to_videos' %}">Videos</a>
           </div>
         </div>
-
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Your full name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="you@example.com" required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary full">Send Enquiry</button>
-          <p class="form-note" id="formNote"></p>
-        </form>
       </div>
-    </section>
-  </main>
+    </footer>
+  </div>
 
-  <footer class="site-footer">
-    <div class="container footer-wrap">
-      <p>© <span id="year"></span> E-INT Finance Limited. All rights reserved.</p>
-      <a href="#top">Back to top</a>
-    </div>
-  </footer>
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const siteNav = document.getElementById("siteNav");
 
- 
-  <!-- Main JS File -->
-  <script src="{% static 'website/script.js' %}"></script>
+    if (menuToggle && siteNav) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = siteNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      siteNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          siteNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    const yearNode = document.getElementById("year");
+    if (yearNode) {
+      yearNode.textContent = new Date().getFullYear();
+    }
+  </script>
+  {% block extra_script %}{% endblock %}
 </body>
 </html>
-
-
