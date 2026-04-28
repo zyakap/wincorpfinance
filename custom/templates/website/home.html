@@ -1,237 +1,822 @@
 {% extends "website/website_base.html" %}
 {% load static %}
 
-{% block title %}WINCORP FINANCE | Modern Finance Access{% endblock %}
+{% block title %}Wincorp Finance Limited — Innovative Financial Solutions{% endblock %}
+{% block meta_description %}Wincorp Finance Limited delivers innovative, accessible and trustworthy financial services for individuals and businesses. Personal banking, business finance, investment, loans, advisory and digital banking.{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* ── Hero ────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(140deg, var(--pu-900) 0%, var(--pu-700) 52%, var(--pu-800) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 5.5rem 0 5rem;
+    color: var(--white);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+  .hero-orb-1 {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    top: -300px; right: -200px;
+    background: radial-gradient(circle, rgba(245,157,31,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-orb-2 {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    bottom: -250px; left: -150px;
+    background: radial-gradient(circle, rgba(150,53,145,0.22) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.9rem 0.35rem 0.35rem;
+    border-radius: var(--r-pill);
+    background: rgba(245,157,31,0.15);
+    border: 1px solid rgba(245,157,31,0.28);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--am-400);
+    margin-bottom: 1.4rem;
+  }
+  .hero-tag-dot {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--am-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--ink-900);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.06;
+    margin-bottom: 1.25rem;
+    color: var(--white);
+  }
+  .hero-copy h1 em {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--am-300), var(--am-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-copy p {
+    font-size: 1.1rem;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.78);
+    max-width: 520px;
+    margin-bottom: 2rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+  .hero-trust-item strong {
+    display: block;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--am-400);
+    margin-bottom: 0.2rem;
+  }
+  .hero-trust-item span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-trust-sep {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+  }
+
+  /* Hero visual card */
+  .hero-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--r-xl);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .hero-logo-wrap {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sh-lg);
+  }
+  .hero-logo-wrap img {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+  }
+  .hero-pills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--r-sm);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero-pill-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(245,157,31,0.25);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--am-400);
+    font-size: 0.65rem;
+    font-weight: 900;
+  }
+  .hero-cta-row {
+    display: flex;
+    gap: 0.65rem;
+  }
+  .hero-cta-row .btn { flex: 1; justify-content: center; font-size: 0.88rem; padding: 0.8rem 1rem; }
+
+  /* ── Stats bar ─────────────────────────────────────── */
+  .stats-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+  .stats-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2.25rem 0;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+  .stat-item strong {
+    display: block;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--pu-600), var(--am-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.35rem;
+  }
+  .stat-item span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-500);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .stats-sep {
+    width: 1px;
+    height: 44px;
+    background: var(--line);
+    flex-shrink: 0;
+  }
+
+  /* ── Services ──────────────────────────────────────── */
+  .service-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 2rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pu-500), var(--am-500));
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+  }
+  .service-card:hover {
+    box-shadow: var(--sh-lg);
+    transform: translateY(-4px);
+  }
+  .service-card:hover::after { opacity: 1; }
+  .service-icon {
+    width: 56px; height: 56px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.3rem;
+  }
+  .service-icon svg { width: 26px; height: 26px; }
+  .service-card h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--ink-900);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .service-card p {
+    font-size: 0.92rem;
+    color: var(--ink-500);
+    line-height: 1.72;
+    margin-bottom: 1.1rem;
+  }
+  .service-link {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--pu-500);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: gap var(--dur) var(--ease);
+  }
+  .service-card:hover .service-link { gap: 0.55rem; }
+
+  /* ── Values ────────────────────────────────────────── */
+  .value-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .value-card:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+  .value-num {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, var(--pu-200), var(--pu-100));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .value-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--ink-900); }
+  .value-card p  { font-size: 0.93rem; color: var(--ink-500); line-height: 1.72; }
+
+  /* ── Process ───────────────────────────────────────── */
+  .process-section {
+    background: linear-gradient(140deg, var(--pu-800) 0%, var(--pu-600) 60%, var(--pu-700) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .process-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+  .process-section::after {
+    content: "";
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    right: -250px; bottom: -250px;
+    background: radial-gradient(circle, rgba(245,157,31,0.14) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .process-inner { position: relative; z-index: 1; }
+  .process-card {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--r-lg);
+    padding: 2rem;
+    position: relative;
+    transition: background var(--dur) var(--ease);
+  }
+  .process-card:hover { background: rgba(255,255,255,0.11); }
+  .process-step {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--am-400);
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .process-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+  .process-card p  { font-size: 0.92rem; color: rgba(255,255,255,0.68); line-height: 1.72; }
+
+  /* ── Compliance strip ──────────────────────────────── */
+  .compliance-strip {
+    background: var(--pu-50);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 2.5rem 0;
+  }
+  .compliance-inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .compliance-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink-700);
+    flex: 1;
+    min-width: 180px;
+  }
+  .compliance-icon {
+    width: 40px; height: 40px;
+    border-radius: var(--r-sm);
+    background: linear-gradient(135deg, var(--pu-100), var(--am-100));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  /* ── CTA section ───────────────────────────────────── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--am-500) 0%, var(--am-400) 50%, #F5A832 100%);
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: "";
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    right: -180px; top: -180px;
+    background: radial-gradient(circle, rgba(255,255,255,0.20) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cta-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cta-copy h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink-900);
+    margin-bottom: 0.75rem;
+  }
+  .cta-copy p {
+    font-size: 1.05rem;
+    color: rgba(26, 18, 36, 0.72);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+  .cta-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    flex-shrink: 0;
+  }
+  .btn-dark {
+    background: var(--pu-800);
+    color: var(--white);
+    border: none;
+    box-shadow: 0 6px 20px rgba(50,14,52,0.28);
+  }
+  .btn-dark:hover { box-shadow: 0 12px 28px rgba(50,14,52,0.38); }
+
+  /* ── Clients section ───────────────────────────────── */
+  .client-type {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .client-type:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+  .client-type-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--r-sm);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  .client-type h4 { font-size: 1rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.35rem; }
+  .client-type p  { font-size: 0.88rem; color: var(--ink-500); line-height: 1.65; }
+
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card  { max-width: 420px; margin: 0 auto; }
+  }
+  @media (max-width: 640px) {
+    .hero-trust { gap: 1.25rem; flex-wrap: wrap; }
+    .stats-inner { flex-direction: column; gap: 1.5rem; }
+    .stats-sep   { width: 80px; height: 1px; }
+    .cta-inner   { flex-direction: column; }
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="hero section">
-    <div class="hero-grid">
-      <div class="hero-copy panel">
-        <span class="eyebrow">Modern Finance Experience</span>
-        <h1>Professional finance access designed for clarity, speed, and confidence.</h1>
-        <p>
-          WINCORP FINANCE LIMITED presents a refined one-page digital front door for clients
-          who need a credible, streamlined path into registration, account login, and company
-          information.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
-          <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Client Login</a>
-          <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
-        </div>
-        <div class="hero-highlights">
-          <div class="pill">
-            <strong>One-page journey</strong>
-            <span>Everything important is surfaced in a single, modern flow.</span>
-          </div>
-          <div class="pill">
-            <strong>Professional presence</strong>
-            <span>A sharper brand experience aligned to WINCORP’s visual identity.</span>
-          </div>
-          <div class="pill">
-            <strong>App-ready access</strong>
-            <span>Registration and login links remain connected to the Django app.</span>
-          </div>
-        </div>
-      </div>
 
-      <aside class="hero-visual panel" aria-label="WINCORP FINANCE overview">
-        <div class="hero-logo-shell">
-          <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="WINCORP FINANCE LIMITED logo" />
-        </div>
-        <div>
-          <span class="eyebrow" style="color: rgba(255,255,255,0.8);">Brand Position</span>
-          <h3 style="margin:0.8rem 0 0.7rem; font-size: 1.7rem;">Sleek, credible, and client-focused.</h3>
-          <p style="margin:0; color: rgba(255,255,255,0.82); line-height:1.75;">
-            The new homepage centers the logo, profile, and account-entry actions while
-            giving WINCORP FINANCE a cleaner and more contemporary presentation.
-          </p>
-        </div>
-      </aside>
-    </div>
-  </section>
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<section class="hero" aria-label="Welcome to Wincorp Finance">
+  <div class="hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb-2" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
 
-  <section class="section">
-    <div class="stat-grid">
-      <div class="stat">
-        <strong>Refined first impression</strong>
-        <span>Modern layout, stronger typography, and a premium color system based on the existing logo.</span>
+    <div class="hero-copy">
+      <div class="hero-tag">
+        <span class="hero-tag-dot">★</span>
+        Wincorp Finance Limited
       </div>
-      <div class="stat">
-        <strong>Clear service discovery</strong>
-        <span>Structured sections help visitors understand the business quickly without leaving the page.</span>
+      <h1>Empowering <em>Financial Excellence</em> for Every Goal</h1>
+      <p>A leading financial institution committed to delivering innovative, accessible, and trustworthy financial solutions. Built on over a decade of integrity, professionalism, and client-first service.</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent btn-lg" href="{% url 'register' %}" target="_blank" rel="noopener">Open an Account</a>
+        <a class="btn btn-ghost btn-lg" href="{% url 'login_user' %}" target="_blank" rel="noopener">Client Login</a>
+        <a class="btn btn-ghost btn-lg" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile ↗</a>
       </div>
-      <div class="stat">
-        <strong>Confident navigation</strong>
-        <span>Core website routes still exist, while the main experience is anchored into a single homepage.</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="about">
-    <div class="split-grid">
-      <div class="copy-block panel">
-        <div class="section-heading">
-          <span class="eyebrow">About WINCORP</span>
-          <h2>A polished digital presence for a serious finance business.</h2>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <strong>10+</strong>
+          <span>Years of Excellence</span>
         </div>
-        <p>
-          This redesigned homepage positions WINCORP FINANCE LIMITED as a modern and dependable
-          finance brand, with messaging that stays professional and broad while highlighting
-          accessibility, efficiency, and client confidence.
-        </p>
-        <p style="margin-top: 1rem;">
-          The layout is intentionally concise: it introduces the company, frames the value
-          proposition, points visitors toward the business profile, and keeps the most important
-          client actions immediately visible.
-        </p>
-      </div>
-
-      <div class="copy-block panel">
-        <h3>Built around practical visitor needs</h3>
-        <p>
-          Instead of scattering information across multiple disconnected pages, the homepage now
-          acts as the primary presentation layer for WINCORP. Visitors can learn about the company,
-          understand the flow, and move straight into the application portal.
-        </p>
-        <div class="hero-actions" style="margin-top: 1.2rem;">
-          <a class="btn btn-secondary" href="{% url 'about' %}">About Page</a>
-          <a class="btn btn-secondary" href="{% url 'contact' %}">Contact Page</a>
+        <div class="hero-trust-sep" aria-hidden="true"></div>
+        <div class="hero-trust-item">
+          <strong>6</strong>
+          <span>Core Services</span>
+        </div>
+        <div class="hero-trust-sep" aria-hidden="true"></div>
+        <div class="hero-trust-item">
+          <strong>100%</strong>
+          <span>Compliant &amp; Regulated</span>
+        </div>
+        <div class="hero-trust-sep" aria-hidden="true"></div>
+        <div class="hero-trust-item">
+          <strong>4</strong>
+          <span>Client Segments</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section" id="solutions">
-    <div class="section-heading">
-      <span class="eyebrow">Key Sections</span>
-      <h2>A one-page structure that stays sleek without losing substance.</h2>
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-logo-wrap">
+        <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="Wincorp Finance Limited" />
+      </div>
+      <div class="hero-pills">
+        <div class="hero-pill"><span class="hero-pill-check">✓</span>Integrity &amp; Trust</div>
+        <div class="hero-pill"><span class="hero-pill-check">✓</span>Innovation Led</div>
+        <div class="hero-pill"><span class="hero-pill-check">✓</span>Client Focused</div>
+        <div class="hero-pill"><span class="hero-pill-check">✓</span>Fully Compliant</div>
+        <div class="hero-pill"><span class="hero-pill-check">✓</span>Transparent</div>
+        <div class="hero-pill"><span class="hero-pill-check">✓</span>Sustainable</div>
+      </div>
+      <div class="hero-cta-row">
+        <a class="btn btn-white btn-sm" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+        <a class="btn btn-primary btn-sm" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+      </div>
     </div>
-    <div class="card-grid">
-      <article class="card">
-        <h3>Company Overview</h3>
-        <p>The opening section establishes WINCORP FINANCE with a stronger, more premium visual identity.</p>
+
+  </div>
+</section>
+
+<!-- ── Stats Bar ──────────────────────────────────────────── -->
+<section class="stats-bar" aria-label="Company at a glance">
+  <div class="wrap stats-inner">
+    <div class="stat-item">
+      <strong>10+</strong>
+      <span>Years of Service</span>
+    </div>
+    <div class="stats-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <strong>6</strong>
+      <span>Financial Services</span>
+    </div>
+    <div class="stats-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <strong>4</strong>
+      <span>Client Segments</span>
+    </div>
+    <div class="stats-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <strong>5</strong>
+      <span>Core Values</span>
+    </div>
+    <div class="stats-sep" aria-hidden="true"></div>
+    <div class="stat-item">
+      <strong>24/7</strong>
+      <span>Digital Access</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services ───────────────────────────────────────────── -->
+<section class="section section-bg" id="services" aria-labelledby="services-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">What We Offer</span>
+      <h2 id="services-heading">Comprehensive Financial Services<br>Tailored to Your Needs</h2>
+      <p>From personal banking to corporate finance and wealth management, we deliver a complete suite of solutions backed by expertise and innovation.</p>
+    </div>
+
+    <div class="g3 g-auto">
+
+      <!-- Personal Finance -->
+      <article class="service-card">
+        <div class="service-icon" style="background: var(--pu-100);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--pu-600)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>Personal Finance Solutions</h3>
+        <p>Tailored personal banking options including savings accounts, personal loans, credit cards, and retirement planning designed to help you achieve your financial aspirations.</p>
+        <a href="{% url 'home' %}#services" class="service-link">Learn more →</a>
       </article>
-      <article class="card">
-        <h3>Profile Access</h3>
-        <p>The business profile is surfaced as a primary call-to-action so visitors can review formal company material easily.</p>
-      </article>
-      <article class="card">
-        <h3>Client Onboarding</h3>
-        <p>Registration remains prominent for new users entering the Django application flow.</p>
-      </article>
-      <article class="card">
-        <h3>Returning User Access</h3>
-        <p>Login remains front and center for existing customers who need immediate portal access.</p>
-      </article>
-    </div>
-  </section>
 
-  <section class="section" id="process">
-    <div class="section-heading">
-      <span class="eyebrow">Simple Journey</span>
-      <h2>A clearer path from first visit to account access.</h2>
+      <!-- Business & Corporate -->
+      <article class="service-card">
+        <div class="service-icon" style="background: var(--am-100);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--am-700)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
+        </div>
+        <h3>Business &amp; Corporate Finance</h3>
+        <p>Business loans, asset financing, trade finance, and cash management solutions designed to support enterprises at every stage of growth.</p>
+        <a href="{% url 'home' %}#services" class="service-link">Learn more →</a>
+      </article>
+
+      <!-- Investment & Wealth -->
+      <article class="service-card">
+        <div class="service-icon" style="background: #EDF7F0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1D7A47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+          </svg>
+        </div>
+        <h3>Investment &amp; Wealth Management</h3>
+        <p>Comprehensive investment advisory, portfolio management, and wealth preservation services to help you grow and protect your assets for the future.</p>
+        <a href="{% url 'home' %}#services" class="service-link">Learn more →</a>
+      </article>
+
+      <!-- Loan & Credit -->
+      <article class="service-card">
+        <div class="service-icon" style="background: #EEF2FF;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+          </svg>
+        </div>
+        <h3>Loan &amp; Credit Facilities</h3>
+        <p>Flexible loan products including home loans, auto loans, business loans, and overdraft facilities with competitive rates and transparent terms.</p>
+        <a href="{% url 'home' %}#services" class="service-link">Learn more →</a>
+      </article>
+
+      <!-- Financial Advisory -->
+      <article class="service-card">
+        <div class="service-icon" style="background: #FFF5F5;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D93025" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <h3>Financial Planning &amp; Advisory</h3>
+        <p>Personalised financial planning and expert advisory services to assist clients in making informed decisions and planning confidently for the future.</p>
+        <a href="{% url 'home' %}#services" class="service-link">Learn more →</a>
+      </article>
+
+      <!-- Digital Banking -->
+      <article class="service-card">
+        <div class="service-icon" style="background: #F0F9FF;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0369A1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+        <h3>Digital &amp; Online Banking</h3>
+        <p>Secure, user-friendly online banking platforms that allow you to manage accounts, transfer funds, and access all our services anytime, anywhere.</p>
+        <a href="{% url 'demo' %}" class="service-link">See demo →</a>
+      </article>
+
     </div>
-    <div class="timeline">
-      <article class="timeline-card">
+  </div>
+</section>
+
+<!-- ── Values ──────────────────────────────────────────────── -->
+<section class="section section-white" id="values" aria-labelledby="values-heading">
+  <div class="wrap">
+    <div class="sh">
+      <span class="eyebrow">Why Choose Us</span>
+      <h2 id="values-heading">Principles That Guide<br>Everything We Do</h2>
+      <p>Our core values are not just statements — they are the foundation of every decision, every product, and every client interaction at Wincorp Finance Limited.</p>
+    </div>
+
+    <div class="g4">
+      <div class="value-card">
+        <span class="value-num" aria-hidden="true">01</span>
+        <h3>Integrity</h3>
+        <p>We operate with the highest standards of honesty and ethical conduct, ensuring our clients can always trust us with their most important financial decisions.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-num" aria-hidden="true">02</span>
+        <h3>Innovation</h3>
+        <p>We continuously invest in technology and new financial solutions, keeping our clients ahead through cutting-edge digital platforms and modern service delivery.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-num" aria-hidden="true">03</span>
+        <h3>Transparency</h3>
+        <p>Every product, fee, and process is communicated clearly. No hidden terms — just straightforward, honest financial services you can rely on.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-num" aria-hidden="true">04</span>
+        <h3>Sustainability</h3>
+        <p>We promote responsible lending, support community development, and pursue sustainable business practices that create lasting value for society.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works (Process) ─────────────────────────────── -->
+<section class="section process-section" id="process" aria-labelledby="process-heading">
+  <div class="wrap process-inner">
+    <div class="sh center light">
+      <span class="eyebrow eyebrow-amber">Simple Journey</span>
+      <h2 id="process-heading">Your Path to Financial Success<br>in Four Simple Steps</h2>
+      <p>Getting started with Wincorp Finance Limited is straightforward. From your first visit to active account management, we make every step clear and easy.</p>
+    </div>
+
+    <div class="g4">
+      <div class="process-card">
+        <div class="process-step">Step 01</div>
         <h3>Discover</h3>
-        <p>Visitors land on one focused page that introduces the company and the available next steps.</p>
-      </article>
-      <article class="timeline-card">
-        <h3>Review</h3>
-        <p>The business profile is available directly from the homepage for quick company reference.</p>
-      </article>
-      <article class="timeline-card">
-        <h3>Register</h3>
-        <p>New clients can move straight into the existing registration route without any URL changes.</p>
-      </article>
-      <article class="timeline-card">
-        <h3>Login</h3>
-        <p>Returning users can access the existing portal immediately through the preserved login route.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-heading">
-      <span class="eyebrow">Why This Works</span>
-      <h2>Sharper presentation, less friction, and cleaner continuity across the website.</h2>
-    </div>
-    <div class="metrics-grid">
-      <article class="metric">
-        <h3>Brand-led design</h3>
-        <p>The plum and amber palette comes directly from the WINCORP logo for stronger visual consistency.</p>
-      </article>
-      <article class="metric">
-        <h3>Professional restraint</h3>
-        <p>The copy avoids unsupported claims while still presenting the company with confidence and credibility.</p>
-      </article>
-      <article class="metric">
-        <h3>Route-safe refresh</h3>
-        <p>The underlying Django URL links for registration, login, and website pages are maintained.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" id="profile">
-    <div class="profile-card">
-      <div class="profile-logo">
-        <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="WINCORP FINANCE logo" />
+        <p>Explore our full range of financial products and services. Review our business profile, learn about our values, and find the right solution for your needs.</p>
       </div>
-      <div>
-        <span class="eyebrow">Company Profile</span>
-        <h3>Keep the official profile close to the homepage experience.</h3>
-        <p>
-          The homepage now includes direct access to the attached WINCORP FINANCE business profile
-          so visitors can move from visual impression to formal company material in one click.
-        </p>
-        <div class="hero-actions" style="margin-top: 1.1rem;">
-          <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Open Business Profile</a>
+      <div class="process-card">
+        <div class="process-step">Step 02</div>
+        <h3>Consult</h3>
+        <p>Connect with our expert financial advisors for personalised guidance tailored to your individual or business goals and unique financial circumstances.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-step">Step 03</div>
+        <h3>Apply</h3>
+        <p>Register quickly through our secure online portal. Our streamlined application process makes opening an account or applying for a product fast and simple.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-step">Step 04</div>
+        <h3>Grow</h3>
+        <p>Access your account 24/7, track your progress, and leverage our full suite of digital banking tools to actively manage and grow your financial future.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who We Serve ────────────────────────────────────────── -->
+<section class="section section-bg" id="clients" aria-labelledby="clients-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Our Clients</span>
+      <h2 id="clients-heading">Serving Individuals, Businesses<br>&amp; Institutions</h2>
+      <p>Our diverse client base spans all sectors and income levels. We provide tailored solutions for every type of client we serve.</p>
+    </div>
+
+    <div class="g4">
+      <div class="client-type">
+        <div class="client-type-icon" style="background: var(--pu-100); font-size: 1.4rem;">👤</div>
+        <div>
+          <h4>Individuals</h4>
+          <p>Personal finance, savings, loans, and retirement planning for individuals across all income levels.</p>
+        </div>
+      </div>
+      <div class="client-type">
+        <div class="client-type-icon" style="background: var(--am-100); font-size: 1.4rem;">🏢</div>
+        <div>
+          <h4>SMEs</h4>
+          <p>Small and medium enterprises seeking business loans, trade finance, and cash management solutions.</p>
+        </div>
+      </div>
+      <div class="client-type">
+        <div class="client-type-icon" style="background: #EDF7F0; font-size: 1.4rem;">🏦</div>
+        <div>
+          <h4>Corporations</h4>
+          <p>Large corporations requiring asset financing, investment advisory, and comprehensive corporate banking.</p>
+        </div>
+      </div>
+      <div class="client-type">
+        <div class="client-type-icon" style="background: #EEF2FF; font-size: 1.4rem;">📊</div>
+        <div>
+          <h4>Institutional Investors</h4>
+          <p>Portfolio management, wealth preservation, and investment solutions for institutional clients.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="contact">
-    <div class="cta-card">
-      <div>
-        <span class="eyebrow" style="color: rgba(255,255,255,0.85);">Client Access</span>
-        <h3 style="margin-top:0.8rem; font-size: clamp(1.8rem, 3vw, 2.5rem);">Ready to continue with WINCORP FINANCE?</h3>
-        <p>
-          Move directly into the application portal, review the company profile, or use the supporting
-          website pages for additional context.
-        </p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn btn-accent" href="{% url 'register' %}" target="_blank" rel="noopener">Create Account</a>
-        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Portal Login</a>
-      </div>
+<!-- ── Compliance Strip ────────────────────────────────────── -->
+<section class="compliance-strip" aria-label="Safety and compliance highlights">
+  <div class="wrap compliance-inner">
+    <div class="compliance-badge">
+      <div class="compliance-icon">🔒</div>
+      <span>Bank-grade encryption &amp; multi-factor authentication</span>
     </div>
-  </section>
+    <div class="compliance-badge">
+      <div class="compliance-icon">✅</div>
+      <span>Fully compliant with all financial regulations</span>
+    </div>
+    <div class="compliance-badge">
+      <div class="compliance-icon">🛡️</div>
+      <span>Robust data protection &amp; privacy protocols</span>
+    </div>
+    <div class="compliance-badge">
+      <div class="compliance-icon">👁️</div>
+      <span>24/7 security monitoring &amp; fraud prevention</span>
+    </div>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="route-grid">
-      <article class="route-card">
-        <h3>About</h3>
-        <p>Additional company context and a clean bridge back to the homepage.</p>
-        <div class="hero-actions" style="margin-top: 1rem;">
-          <a class="btn btn-secondary" href="{% url 'about' %}">Visit About</a>
-        </div>
-      </article>
-      <article class="route-card">
-        <h3>Contact</h3>
-        <p>A dedicated access page for company profile, registration, and login routes.</p>
-        <div class="hero-actions" style="margin-top: 1rem;">
-          <a class="btn btn-secondary" href="{% url 'contact' %}">Visit Contact</a>
-        </div>
-      </article>
-      <article class="route-card">
-        <h3>Support Pages</h3>
-        <p>Legacy website routes remain available in a cleaner, branded presentation.</p>
-        <div class="hero-actions" style="margin-top: 1rem;">
-          <a class="btn btn-secondary" href="{% url 'clients' %}">Client Access</a>
-        </div>
-      </article>
+<!-- ── CTA ─────────────────────────────────────────────────── -->
+<section class="cta-section" aria-labelledby="cta-heading">
+  <div class="wrap cta-inner">
+    <div class="cta-copy">
+      <span class="eyebrow" style="color: var(--ink-700);">Get Started Today</span>
+      <h2 id="cta-heading">Ready to Achieve Your<br>Financial Goals?</h2>
+      <p>Join thousands of clients who trust Wincorp Finance Limited with their financial future. Register today or log in to your existing account.</p>
     </div>
-  </section>
+    <div class="cta-btns">
+      <a class="btn btn-dark btn-lg" href="{% url 'register' %}" target="_blank" rel="noopener">Open an Account</a>
+      <a class="btn btn-outline btn-lg" style="color: var(--ink-900); border-color: rgba(26,18,36,0.25);" href="{% url 'login_user' %}" target="_blank" rel="noopener">Client Login</a>
+      <a class="btn btn-outline btn-lg" style="color: var(--ink-900); border-color: rgba(26,18,36,0.25);" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">View Profile</a>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

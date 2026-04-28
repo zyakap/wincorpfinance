@@ -1,41 +1,563 @@
 {% extends "website/website_base.html" %}
 {% load static %}
 
-{% block title %}About | WINCORP FINANCE{% endblock %}
+{% block title %}About Us | Wincorp Finance Limited{% endblock %}
+{% block meta_description %}Learn about Wincorp Finance Limited — our history, mission, vision, core values, and the experienced leadership team driving our commitment to financial excellence.{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* ── About-page specifics ──────────────────────────── */
+  .about-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .about-lead-text h2 {
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    color: var(--ink-900);
+    margin-bottom: 1.1rem;
+  }
+  .about-lead-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink-500);
+    margin-bottom: 1rem;
+  }
+  .about-lead-text p:last-child { margin-bottom: 0; }
+
+  .about-highlight-box {
+    background: linear-gradient(145deg, var(--pu-800), var(--pu-600));
+    border-radius: var(--r-xl);
+    padding: 2.5rem;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-highlight-box::before {
+    content: "";
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    right: -100px; bottom: -100px;
+    background: radial-gradient(circle, rgba(245,157,31,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .about-highlight-box-inner { position: relative; z-index: 1; }
+  .about-highlight-box h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .about-highlight-box p {
+    font-size: 0.95rem;
+    line-height: 1.78;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 1.4rem;
+  }
+  .about-logo-display {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    margin-bottom: 1.5rem;
+  }
+  .about-logo-display img { max-width: 220px; height: auto; }
+
+  /* History milestones */
+  .milestone-list { display: flex; flex-direction: column; gap: 0; }
+  .milestone {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .milestone:last-child { border-bottom: none; }
+  .milestone-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+  .milestone-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pu-500), var(--am-500));
+    flex-shrink: 0;
+  }
+  .milestone-dot-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(180deg, var(--pu-200), transparent);
+    margin-top: 6px;
+  }
+  .milestone-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink-900);
+    margin-bottom: 0.3rem;
+  }
+  .milestone-content p {
+    font-size: 0.9rem;
+    color: var(--ink-500);
+    line-height: 1.7;
+  }
+
+  /* Mission / Vision split */
+  .mv-card {
+    border-radius: var(--r-xl);
+    padding: 2.5rem;
+    height: 100%;
+  }
+  .mv-card-purple {
+    background: linear-gradient(140deg, var(--pu-800), var(--pu-600));
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .mv-card-purple::after {
+    content: "";
+    position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    right: -100px; top: -100px;
+    background: radial-gradient(circle, rgba(245,157,31,0.16) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .mv-card-amber {
+    background: linear-gradient(140deg, var(--am-500), var(--am-400));
+    color: var(--ink-900);
+  }
+  .mv-card-inner { position: relative; z-index: 1; }
+  .mv-icon {
+    width: 52px; height: 52px;
+    border-radius: var(--r-sm);
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .mv-card h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .mv-card-purple h3, .mv-card-purple p { color: var(--white); }
+  .mv-card-purple p { color: rgba(255,255,255,0.80); }
+  .mv-card-amber  p { color: rgba(26,18,36,0.78); }
+  .mv-card p { font-size: 0.97rem; line-height: 1.8; margin-bottom: 0.9rem; }
+  .mv-card p:last-child { margin-bottom: 0; }
+
+  /* Values grid */
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .val-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 1.75rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .val-card:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+  .val-card-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .val-card h4 { font-size: 1rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.45rem; }
+  .val-card p  { font-size: 0.9rem; color: var(--ink-500); line-height: 1.72; }
+
+  /* Team */
+  .team-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 2rem 1.75rem;
+    text-align: center;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .team-card:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+  .team-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pu-600), var(--pu-400));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--white);
+    margin: 0 auto 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .team-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.3rem; }
+  .team-card .role {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pu-500);
+    background: var(--pu-100);
+    padding: 0.28rem 0.75rem;
+    border-radius: var(--r-pill);
+    display: inline-block;
+    margin-bottom: 0.85rem;
+  }
+  .team-card p { font-size: 0.88rem; color: var(--ink-500); line-height: 1.65; }
+
+  /* Why choose box */
+  .why-box {
+    background: var(--pu-50);
+    border: 1px solid var(--pu-100);
+    border-radius: var(--r-xl);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .why-box h3 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    color: var(--ink-900);
+    margin-bottom: 1rem;
+  }
+  .why-box p { font-size: 0.97rem; color: var(--ink-500); line-height: 1.78; margin-bottom: 1.25rem; }
+  .why-checklist { display: flex; flex-direction: column; gap: 0.65rem; }
+  .why-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    color: var(--ink-700);
+    font-weight: 500;
+  }
+  .why-check-bullet {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pu-500), var(--am-500));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  @media (max-width: 960px) {
+    .about-overview { grid-template-columns: 1fr; }
+    .values-grid     { grid-template-columns: repeat(2, 1fr); }
+    .why-box         { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .g2          { grid-template-columns: 1fr; }
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="section">
-    <div class="page-hero panel">
-      <span class="eyebrow">About</span>
-      <h1>WINCORP FINANCE with a cleaner, more focused web presence.</h1>
-      <p>
-        This page supports the redesigned homepage by giving visitors a dedicated place to
-        understand the website direction, company presentation, and next-step links without
-        breaking the existing Django route structure.
-      </p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="{% url 'home' %}">Back to Homepage</a>
-        <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
+
+<!-- ── Page Banner ────────────────────────────────────────── -->
+<section class="page-banner" aria-label="About Wincorp Finance Limited">
+  <div class="wrap page-banner-inner">
+    <span class="eyebrow eyebrow-amber">Our Story</span>
+    <h1>About Wincorp Finance Limited</h1>
+    <p>A decade of growth, trust, and financial innovation. Learn who we are, what drives us, and the experienced team behind every client success.</p>
+    <div class="page-banner-actions">
+      <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile PDF</a>
+      <a class="btn btn-ghost" href="{% url 'contact' %}">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Company Overview ───────────────────────────────────── -->
+<section class="section section-white" id="overview" aria-labelledby="overview-heading">
+  <div class="wrap">
+    <div class="about-overview">
+
+      <div class="about-lead-text">
+        <span class="eyebrow">Company Overview</span>
+        <h2 id="overview-heading">A Leading Financial Institution Built on Trust &amp; Innovation</h2>
+        <p>Wincorp Finance Limited is a leading financial institution committed to providing innovative and reliable financial solutions to individuals and businesses. With a reputation built on trust, integrity, and professionalism, we strive to meet the diverse needs of our clients through a wide range of financial products and services tailored to their unique requirements.</p>
+        <p>Our core values revolve around integrity, customer-centricity, innovation, transparency, and sustainability. These principles guide every decision we make and every service we deliver, ensuring that we uphold the trust placed in us by our clients and stakeholders.</p>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+          <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Open an Account</a>
+          <a class="btn btn-outline" href="{% url 'contact' %}">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="about-highlight-box">
+        <div class="about-highlight-box-inner">
+          <div class="about-logo-display">
+            <img src="{% static 'clientfiles/wincorp logo.png' %}" alt="Wincorp Finance Limited" />
+          </div>
+          <h3>Choosing Wincorp Means Choosing Excellence</h3>
+          <p>Partnering with a stable, experienced, and forward-thinking financial institution that prioritises personalised service, technological innovation, and strict compliance with industry standards.</p>
+          <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Read Our Full Profile ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── History & Milestones ───────────────────────────────── -->
+<section class="section section-bg" id="history" aria-labelledby="history-heading">
+  <div class="wrap">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+
+      <div>
+        <span class="eyebrow">Our Journey</span>
+        <h2 id="history-heading" style="font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.03em;line-height:1.12;color:var(--ink-900);margin-bottom:1.25rem;">
+          A Decade of Growth &amp; Milestones
+        </h2>
+        <p style="font-size:1rem;line-height:1.8;color:var(--ink-500);margin-bottom:2rem;">Founded over a decade ago, Wincorp Finance Limited has grown significantly, marking numerous milestones along the way. From our humble beginnings as a small financial service provider, we have expanded our operations, established strategic partnerships, and introduced cutting-edge technology to serve our clients better.</p>
+
+        <div class="milestone-list">
+          <div class="milestone">
+            <div class="milestone-dot-col">
+              <div class="milestone-dot"></div>
+              <div class="milestone-dot-line"></div>
+            </div>
+            <div class="milestone-content">
+              <h4>Foundation</h4>
+              <p>Established as a small but ambitious financial service provider with a clear commitment to integrity and client service.</p>
+            </div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot-col">
+              <div class="milestone-dot"></div>
+              <div class="milestone-dot-line"></div>
+            </div>
+            <div class="milestone-content">
+              <h4>Digital Banking Platform</h4>
+              <p>Launched our digital banking platform, enabling clients to access financial services securely online — anytime, anywhere.</p>
+            </div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot-col">
+              <div class="milestone-dot"></div>
+              <div class="milestone-dot-line"></div>
+            </div>
+            <div class="milestone-content">
+              <h4>Asset Management Growth</h4>
+              <p>Reached a major asset management milestone, reflecting our clients' growing trust in our investment and wealth services.</p>
+            </div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot-col">
+              <div class="milestone-dot"></div>
+            </div>
+            <div class="milestone-content">
+              <h4>Excellence in Customer Service</h4>
+              <p>Earned recognition for excellence in customer service, validating our commitment to client-first delivery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.85rem;">
+            <div style="width:40px;height:40px;border-radius:var(--r-sm);background:var(--pu-100);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">📈</div>
+            <h4 style="font-size:1rem;font-weight:700;color:var(--ink-900);">Strategic Growth</h4>
+          </div>
+          <p style="font-size:0.92rem;color:var(--ink-500);line-height:1.72;">We have expanded our operations, established strategic partnerships, and diversified our financial offerings to better serve every client segment.</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.85rem;">
+            <div style="width:40px;height:40px;border-radius:var(--r-sm);background:var(--am-100);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🌱</div>
+            <h4 style="font-size:1rem;font-weight:700;color:var(--ink-900);">Community Impact</h4>
+          </div>
+          <p style="font-size:0.92rem;color:var(--ink-500);line-height:1.72;">We support local development projects, promote financial literacy, and encourage sustainable business practices that benefit society.</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.85rem;">
+            <div style="width:40px;height:40px;border-radius:var(--r-sm);background:#EDF7F0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🔬</div>
+            <h4 style="font-size:1rem;font-weight:700;color:var(--ink-900);">Technology Driven</h4>
+          </div>
+          <p style="font-size:0.92rem;color:var(--ink-500);line-height:1.72;">We continually invest in cutting-edge technology to deliver seamless, secure, and innovative digital financial services to our clients.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Mission & Vision ───────────────────────────────────── -->
+<section class="section section-white" id="mission" aria-labelledby="mv-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Purpose &amp; Direction</span>
+      <h2 id="mv-heading">Our Mission &amp; Vision</h2>
+      <p>Every decision at Wincorp Finance Limited is guided by a clear sense of purpose and a bold vision for the future of financial services.</p>
+    </div>
+
+    <div class="g2">
+      <div class="mv-card mv-card-purple">
+        <div class="mv-card-inner">
+          <div class="mv-icon">🎯</div>
+          <h3>Our Mission</h3>
+          <p>To empower individuals and businesses to achieve their financial goals through innovative, accessible, and trustworthy financial services. We are dedicated to providing tailored solutions that foster economic growth and financial stability.</p>
+          <p>At Wincorp Finance Limited, our purpose is to serve as a reliable partner in our clients' financial journeys by offering comprehensive financial products and expert advisory services that meet their evolving needs.</p>
+          <p>We are deeply committed to building lasting relationships based on transparency, integrity, and mutual success.</p>
+        </div>
+      </div>
+
+      <div class="mv-card mv-card-amber">
+        <div class="mv-card-inner">
+          <div class="mv-icon" style="background:rgba(26,18,36,0.10);">🔭</div>
+          <h3>Our Vision</h3>
+          <p>To be recognised as a premier financial services provider known for excellence, innovation, and social impact. We aspire to lead the industry by setting standards of professionalism, technological advancement, and customer satisfaction.</p>
+          <p>We aim to expand our market reach, introduce new financial products tailored to emerging needs, and build a strong digital infrastructure that offers seamless banking experiences worldwide.</p>
+          <p>Our goal is to become a market leader within our region by consistently delivering innovative solutions and maintaining high standards of service.</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="split-grid">
-      <article class="content-panel panel">
-        <h3>What changed</h3>
-        <p>
-          The website experience now centers around a sleek one-page homepage with stronger
-          branding, cleaner calls to action, and a more executive visual tone.
-        </p>
-      </article>
-      <article class="content-panel panel">
-        <h3>What stayed intact</h3>
-        <p>
-          Existing application URLs, including registration and login, are still preserved so
-          the redesign improves presentation without disrupting the working Django app.
-        </p>
-      </article>
+<!-- ── Core Values ─────────────────────────────────────────── -->
+<section class="section section-bg" id="values" aria-labelledby="values-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">What We Stand For</span>
+      <h2 id="values-heading">Our Core Values</h2>
+      <p>These are the principles that define us and distinguish the Wincorp Finance experience from the first interaction to every ongoing relationship.</p>
     </div>
-  </section>
+
+    <div class="values-grid">
+      <div class="val-card">
+        <div class="val-card-icon" style="background:var(--pu-100);">🤝</div>
+        <h4>Integrity</h4>
+        <p>We operate with the highest ethical standards, ensuring complete honesty and transparency in every transaction and client relationship.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-card-icon" style="background:var(--am-100);">👥</div>
+        <h4>Customer-Centricity</h4>
+        <p>Our clients are at the heart of everything we do. We tailor every product and service to their unique needs, goals, and circumstances.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-card-icon" style="background:#EDF7F0;">💡</div>
+        <h4>Innovation</h4>
+        <p>We invest in technology and new ideas to continuously improve our services and stay ahead in an ever-evolving financial landscape.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-card-icon" style="background:#EEF2FF;">🔍</div>
+        <h4>Transparency</h4>
+        <p>Clear communication, no hidden fees, and open processes — because you deserve to fully understand every aspect of your financial relationship with us.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-card-icon" style="background:#FFF5F5;">🌱</div>
+        <h4>Sustainability</h4>
+        <p>We pursue responsible lending and sustainable business practices that create enduring value for our clients, community, and environment.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-card-icon" style="background:#F0F9FF;">📋</div>
+        <h4>Compliance</h4>
+        <p>Strict adherence to all relevant financial regulations and industry standards, ensuring fairness, legality, and protection for every client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Management Team ────────────────────────────────────── -->
+<section class="section section-white" id="team" aria-labelledby="team-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Leadership</span>
+      <h2 id="team-heading">Meet Our Management Team</h2>
+      <p>Our leadership team comprises experienced professionals with diverse backgrounds in banking, finance, and corporate management, committed to steering Wincorp Finance towards sustained growth.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:900px;margin:0 auto;">
+
+      <div class="team-card">
+        <div class="team-avatar">AK</div>
+        <h4>Albert Kelgai</h4>
+        <span class="role">Managing Director</span>
+        <p>Leading Wincorp Finance with a vision for sustainable growth, excellence in service delivery, and industry innovation.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,var(--am-600),var(--am-400));">AO</div>
+        <h4>Angela Opur</h4>
+        <span class="role">Admin Manager</span>
+        <p>Overseeing operational efficiency, compliance, and administrative excellence across all departments.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#1D7A47,#2AA05F);">JT</div>
+        <h4>Jeffrey Tende</h4>
+        <span class="role">Marketing Manager</span>
+        <p>Driving brand strategy, client acquisition, and market engagement to grow Wincorp Finance's presence and reputation.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#4F46E5,#7C3AED);">JW</div>
+        <h4>Justin Wak</h4>
+        <span class="role">Sales Officer</span>
+        <p>Building client relationships and delivering tailored financial solutions to individuals and business clients.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#D93025,#E45B54);">JA</div>
+        <h4>John Algo</h4>
+        <span class="role">Sales Officer</span>
+        <p>Supporting clients through the full financial services journey with professionalism and a commitment to client satisfaction.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Why Choose Wincorp ─────────────────────────────────── -->
+<section class="section section-bg" aria-labelledby="why-heading">
+  <div class="wrap">
+    <div class="why-box">
+      <div>
+        <span class="eyebrow">Why Wincorp</span>
+        <h3 id="why-heading">Your Preferred Partner for Dependable Financial Solutions</h3>
+        <p>Choosing Wincorp Finance Limited means partnering with a stable, experienced, and forward-thinking financial institution. We prioritise personalised service, technological innovation, and strict compliance with industry standards to ensure your financial security and growth.</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Get Started</a>
+          <a class="btn btn-outline" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
+        </div>
+      </div>
+      <div class="why-checklist">
+        <div class="why-check"><span class="why-check-bullet">✓</span>Over a decade of proven financial expertise</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Fully regulated and compliant with industry standards</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Comprehensive suite of six core financial services</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Cutting-edge digital banking platform with 24/7 access</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Personalised service tailored to your unique needs</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Experienced leadership committed to client success</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Transparent processes with no hidden fees</div>
+        <div class="why-check"><span class="why-check-bullet">✓</span>Strong community impact and sustainable practices</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

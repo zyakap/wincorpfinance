@@ -1,21 +1,311 @@
 {% extends "website/website_base.html" %}
+{% load static %}
 
-{% block title %}Client Access | WINCORP FINANCE{% endblock %}
+{% block title %}Client Access | Wincorp Finance Limited{% endblock %}
+{% block meta_description %}Access the Wincorp Finance client portal. New clients can register for an account. Existing clients can log in to manage their accounts, loans, and investments.{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* ── Client access portal cards ─────────────────────── */
+  .portal-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .portal-access-card {
+    border-radius: var(--r-xl);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .pac-purple {
+    background: linear-gradient(145deg, var(--pu-800), var(--pu-600));
+    color: var(--white);
+  }
+  .pac-amber {
+    background: linear-gradient(145deg, var(--am-500), var(--am-400));
+    color: var(--ink-900);
+  }
+  .pac-purple::after, .pac-amber::after {
+    content: "";
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    right: -100px; bottom: -100px;
+    pointer-events: none;
+  }
+  .pac-purple::after { background: radial-gradient(circle, rgba(245,157,31,0.18) 0%, transparent 65%); }
+  .pac-amber::after  { background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, transparent 65%); }
+  .pac-inner { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
+  .pac-icon {
+    width: 60px; height: 60px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.3rem;
+  }
+  .pac-purple .pac-icon { background: rgba(255,255,255,0.12); }
+  .pac-amber  .pac-icon { background: rgba(26,18,36,0.10); }
+  .portal-access-card h2 { font-size: 1.6rem; font-weight: 800; letter-spacing:-0.03em; line-height:1.2; margin-bottom:0.65rem; }
+  .pac-purple h2 { color: var(--white); }
+  .portal-access-card p  { font-size:0.97rem; line-height:1.78; margin-bottom:1.5rem; }
+  .pac-purple p { color: rgba(255,255,255,0.80); }
+  .pac-amber  p { color: rgba(26,18,36,0.72); }
+  .portal-access-card .btn { margin-top: auto; }
+  .pac-btn-list { display:flex; flex-direction:column; gap:0.65rem; margin-top:1.5rem; }
+
+  /* Client segment cards */
+  .segment-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 2rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .segment-card:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+  .segment-icon {
+    width: 56px; height: 56px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.1rem;
+  }
+  .segment-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.55rem; }
+  .segment-card p  { font-size: 0.92rem; color: var(--ink-500); line-height: 1.72; margin-bottom: 1.1rem; }
+  .segment-tags { display:flex; flex-wrap:wrap; gap:0.45rem; }
+  .segment-tag {
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--r-pill);
+    background: var(--pu-100);
+    color: var(--pu-600);
+  }
+
+  /* Safety features */
+  .safety-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-xs);
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .safety-item:hover { box-shadow: var(--sh-md); }
+  .safety-icon {
+    width: 44px; height: 44px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .safety-item h4 { font-size: 0.97rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.3rem; }
+  .safety-item p  { font-size: 0.88rem; color: var(--ink-500); line-height: 1.65; }
+
+  @media (max-width: 768px) {
+    .portal-hero-grid { grid-template-columns: 1fr; }
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="section">
-    <div class="page-hero panel">
-      <span class="eyebrow">Client Access</span>
-      <h1>Fast entry points for new and returning users.</h1>
-      <p>
-        This page remains available as part of the existing route structure while the main
-        website experience now lives on the one-page homepage.
-      </p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Create Account</a>
-        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Portal Login</a>
-        <a class="btn btn-secondary" href="{% url 'home' %}">Homepage</a>
+
+<!-- ── Page Banner ────────────────────────────────────────── -->
+<section class="page-banner" aria-label="Client portal access">
+  <div class="wrap page-banner-inner">
+    <span class="eyebrow eyebrow-amber">Client Portal</span>
+    <h1>Secure Access to Your Financial Account</h1>
+    <p>Whether you're registering for the first time or returning to manage your account, your Wincorp Finance portal is just one click away.</p>
+  </div>
+</section>
+
+<!-- ── Portal Access Cards ────────────────────────────────── -->
+<section class="section section-bg" aria-labelledby="portal-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Account Access</span>
+      <h2 id="portal-heading">Register or Log In to Your Portal</h2>
+      <p>New clients can create an account in minutes. Existing clients have direct access to all account features through the secure portal.</p>
+    </div>
+
+    <div class="portal-hero-grid">
+
+      <div class="portal-access-card pac-purple">
+        <div class="pac-inner">
+          <div class="pac-icon">🔑</div>
+          <h2>Client Login</h2>
+          <p>Welcome back. Log in to manage your accounts, view statements, apply for products, and access all Wincorp Finance digital banking features.</p>
+          <div class="pac-btn-list">
+            <a class="btn btn-accent btn-lg" href="{% url 'login_user' %}" target="_blank" rel="noopener">Log In to Portal →</a>
+            <a class="btn btn-ghost" href="{% url 'register' %}" target="_blank" rel="noopener">First time? Register here</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-access-card pac-amber">
+        <div class="pac-inner">
+          <div class="pac-icon">✍️</div>
+          <h2>New Client Registration</h2>
+          <p>Join thousands of clients who trust Wincorp Finance. Create your account securely online and unlock access to our full suite of financial services.</p>
+          <a class="btn btn-dark btn-lg" href="{% url 'register' %}" target="_blank" rel="noopener">Create Account →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Client Segments ────────────────────────────────────── -->
+<section class="section section-white" id="segments" aria-labelledby="segments-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Who We Serve</span>
+      <h2 id="segments-heading">Financial Solutions for Every Client</h2>
+      <p>Our client base spans all sectors and income levels. We tailor every financial solution to match the specific profile and goals of each client we serve.</p>
+    </div>
+
+    <div class="g4">
+
+      <div class="segment-card">
+        <div class="segment-icon" style="background:var(--pu-100);">👤</div>
+        <h3>Individuals</h3>
+        <p>Personal finance solutions for everyday banking, savings, credit, and long-term retirement planning tailored to your life stage.</p>
+        <div class="segment-tags">
+          <span class="segment-tag">Savings Accounts</span>
+          <span class="segment-tag">Personal Loans</span>
+          <span class="segment-tag">Credit Cards</span>
+          <span class="segment-tag">Retirement Plans</span>
+        </div>
+      </div>
+
+      <div class="segment-card">
+        <div class="segment-icon" style="background:var(--am-100);">🏢</div>
+        <h3>SMEs</h3>
+        <p>Small and medium enterprise finance solutions designed to support growth, manage cash flow, and fund key business milestones.</p>
+        <div class="segment-tags">
+          <span class="segment-tag">Business Loans</span>
+          <span class="segment-tag">Trade Finance</span>
+          <span class="segment-tag">Cash Management</span>
+          <span class="segment-tag">Asset Finance</span>
+        </div>
+      </div>
+
+      <div class="segment-card">
+        <div class="segment-icon" style="background:#EDF7F0;">🏦</div>
+        <h3>Large Corporations</h3>
+        <p>Comprehensive corporate banking services including asset financing, investment advisory, and structured finance for large organisations.</p>
+        <div class="segment-tags">
+          <span class="segment-tag">Corporate Loans</span>
+          <span class="segment-tag">Asset Financing</span>
+          <span class="segment-tag">Investment Services</span>
+          <span class="segment-tag">Structured Finance</span>
+        </div>
+      </div>
+
+      <div class="segment-card">
+        <div class="segment-icon" style="background:#EEF2FF;">📊</div>
+        <h3>Institutional Investors</h3>
+        <p>Portfolio management, wealth preservation, and sophisticated investment solutions tailored to institutional investors and fund managers.</p>
+        <div class="segment-tags">
+          <span class="segment-tag">Portfolio Management</span>
+          <span class="segment-tag">Wealth Preservation</span>
+          <span class="segment-tag">Investment Advisory</span>
+          <span class="segment-tag">Fund Services</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Client Testimonials / Trust ────────────────────────── -->
+<section class="section section-bg" aria-labelledby="trust-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Client Satisfaction</span>
+      <h2 id="trust-heading">Trusted by Clients Across Industries</h2>
+      <p>Our clients consistently praise Wincorp Finance for our professionalism, personalised approach, and innovative solutions that meet their specific needs.</p>
+    </div>
+    <div class="g3">
+      <div class="card" style="text-align:center;padding:2.5rem 2rem;">
+        <div style="font-size:2rem;margin-bottom:0.8rem;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:0.97rem;color:var(--ink-500);line-height:1.75;margin-bottom:1.25rem;font-style:italic;">"Wincorp Finance helped us secure the business loan we needed to expand. The process was clear, fair, and professional throughout."</p>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--ink-900);">SME Client</div>
+        <div style="font-size:0.78rem;color:var(--ink-500);margin-top:0.2rem;">Business &amp; Corporate Finance</div>
+      </div>
+      <div class="card" style="text-align:center;padding:2.5rem 2rem;">
+        <div style="font-size:2rem;margin-bottom:0.8rem;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:0.97rem;color:var(--ink-500);line-height:1.75;margin-bottom:1.25rem;font-style:italic;">"The digital banking platform is seamless. I manage all my accounts, track investments, and transfer funds with complete confidence."</p>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--ink-900);">Individual Client</div>
+        <div style="font-size:0.78rem;color:var(--ink-500);margin-top:0.2rem;">Personal Finance &amp; Digital Banking</div>
+      </div>
+      <div class="card" style="text-align:center;padding:2.5rem 2rem;">
+        <div style="font-size:2rem;margin-bottom:0.8rem;">⭐⭐⭐⭐⭐</div>
+        <p style="font-size:0.97rem;color:var(--ink-500);line-height:1.75;margin-bottom:1.25rem;font-style:italic;">"Their investment advisory team truly understands our portfolio goals. We have seen consistent growth under their expert management."</p>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--ink-900);">Institutional Client</div>
+        <div style="font-size:0.78rem;color:var(--ink-500);margin-top:0.2rem;">Investment &amp; Wealth Management</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ── Safety Features ────────────────────────────────────── -->
+<section class="section section-white" aria-labelledby="safety-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Your Security</span>
+      <h2 id="safety-heading">Bank-Grade Security Protecting Your Account</h2>
+      <p>Your financial security is our highest priority. Every aspect of our platform is built to safeguard your data and assets.</p>
+    </div>
+    <div class="g-auto">
+      <div class="safety-item">
+        <div class="safety-icon" style="background:var(--pu-100);">🔒</div>
+        <div>
+          <h4>End-to-End Encryption</h4>
+          <p>All data transmitted through our platform is protected by bank-grade encryption protocols, keeping your information completely private.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon" style="background:var(--am-100);">🛡️</div>
+        <div>
+          <h4>Multi-Factor Authentication</h4>
+          <p>An additional layer of security ensures only you can access your account, even if your password is compromised.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon" style="background:#EDF7F0;">👁️</div>
+        <div>
+          <h4>24/7 Monitoring</h4>
+          <p>Our security team monitors systems around the clock to detect and respond to any suspicious activity instantly.</p>
+        </div>
+      </div>
+      <div class="safety-item">
+        <div class="safety-icon" style="background:#EEF2FF;">✅</div>
+        <div>
+          <h4>Regulatory Compliance</h4>
+          <p>Wincorp Finance strictly adheres to all relevant financial regulations, ensuring full legal compliance in every operation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;display:flex;gap:0.85rem;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn-primary btn-lg" href="{% url 'register' %}" target="_blank" rel="noopener">Create Your Account</a>
+      <a class="btn btn-outline btn-lg" href="{% url 'login_user' %}" target="_blank" rel="noopener">Log In to Portal</a>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

@@ -1,21 +1,267 @@
 {% extends "website/website_base.html" %}
+{% load static %}
 
-{% block title %}Demo | WINCORP FINANCE{% endblock %}
+{% block title %}Platform Demo | Wincorp Finance Limited{% endblock %}
+{% block meta_description %}Explore the Wincorp Finance digital banking platform. Discover how our secure, user-friendly online portal lets you manage accounts, transfer funds, and access all financial services.{% endblock %}
+
+{% block extra_head %}
+<style>
+  .demo-feature {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .demo-feature:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+  .demo-feature-icon {
+    width: 52px; height: 52px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .demo-feature h3 { font-size: 1.05rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.4rem; }
+  .demo-feature p  { font-size: 0.9rem; color: var(--ink-500); line-height: 1.7; }
+
+  .demo-screen {
+    background: var(--pu-900);
+    border-radius: var(--r-xl);
+    padding: 1.5rem;
+    box-shadow: var(--sh-xl);
+  }
+  .demo-screen-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .demo-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .demo-screen-url {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--r-pill);
+    padding: 0.35rem 0.9rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    font-family: monospace;
+  }
+  .demo-screen-content {
+    background: var(--bg);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .demo-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
+  .demo-stat-box {
+    background: var(--white);
+    border-radius: var(--r-md);
+    padding: 1rem;
+    border: 1px solid var(--line);
+  }
+  .demo-stat-box .label { font-size: 0.7rem; font-weight: 700; color: var(--ink-500); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .demo-stat-box .value { font-size: 1.2rem; font-weight: 800; color: var(--ink-900); letter-spacing: -0.02em; }
+  .demo-stat-box .change { font-size: 0.72rem; font-weight: 600; color: #1D7A47; margin-top: 0.2rem; }
+  .demo-chart-bar {
+    background: var(--white);
+    border-radius: var(--r-md);
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+  }
+  .demo-chart-label { font-size: 0.75rem; font-weight: 700; color: var(--ink-700); margin-bottom: 0.65rem; }
+  .demo-bars { display: flex; align-items: flex-end; gap: 6px; height: 60px; }
+  .demo-bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    background: linear-gradient(180deg, var(--pu-400), var(--pu-600));
+    opacity: 0.85;
+  }
+  .demo-txn-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .demo-txn {
+    background: var(--white);
+    border-radius: var(--r-sm);
+    padding: 0.65rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+  }
+  .demo-txn-name { font-size: 0.82rem; font-weight: 600; color: var(--ink-900); }
+  .demo-txn-date { font-size: 0.72rem; color: var(--ink-500); }
+  .demo-txn-amount { font-size: 0.88rem; font-weight: 700; }
+  .demo-txn-amount.credit { color: #1D7A47; }
+  .demo-txn-amount.debit  { color: #D93025; }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="section">
-    <div class="page-hero panel">
-      <span class="eyebrow">Demo</span>
-      <h1>The demo page has been cleaned up to keep the website presentation professional.</h1>
-      <p>
-        The old public credential-style content has been removed. Visitors are now directed back
-        to the homepage and the official account routes instead.
-      </p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="{% url 'home' %}">Homepage</a>
-        <a class="btn btn-secondary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
-        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+
+<!-- ── Page Banner ────────────────────────────────────────── -->
+<section class="page-banner" aria-label="Wincorp Finance Digital Platform Demo">
+  <div class="wrap page-banner-inner">
+    <span class="eyebrow eyebrow-amber">Digital Platform</span>
+    <h1>Banking at Your Fingertips, Around the Clock</h1>
+    <p>Our secure, intuitive digital banking platform gives you complete control over your finances — accounts, transfers, loans, investments and more — all in one place, 24/7.</p>
+    <div class="page-banner-actions">
+      <a class="btn btn-accent" href="{% url 'register' %}" target="_blank" rel="noopener">Create an Account</a>
+      <a class="btn btn-ghost" href="{% url 'login_user' %}" target="_blank" rel="noopener">Log In to Portal</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Platform Preview ───────────────────────────────────── -->
+<section class="section section-bg" aria-labelledby="demo-heading">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;">
+
+      <div>
+        <span class="eyebrow">Platform Overview</span>
+        <h2 id="demo-heading" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:var(--ink-900);margin-bottom:1rem;">
+          One Secure Platform for All Your Financial Needs
+        </h2>
+        <p style="font-size:1.05rem;color:var(--ink-500);line-height:1.78;margin-bottom:1.5rem;">Wincorp Finance leverages cutting-edge technology to provide a secure, user-friendly online banking platform. Manage all your accounts, transfer funds, apply for products, and monitor your portfolio — all from your browser or mobile device.</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Get Started Free</a>
+          <a class="btn btn-outline" href="{% url 'how_to_videos' %}">Watch Tutorials</a>
+        </div>
+      </div>
+
+      <!-- Mock screen -->
+      <div class="demo-screen" aria-label="Platform dashboard preview" aria-hidden="true">
+        <div class="demo-screen-bar">
+          <div class="demo-dot" style="background:#FF5F57;"></div>
+          <div class="demo-dot" style="background:#FEBC2E;"></div>
+          <div class="demo-dot" style="background:#28C840;"></div>
+          <div class="demo-screen-url">portal.wincorpfinance.com/dashboard</div>
+        </div>
+        <div class="demo-screen-content">
+          <div class="demo-stat-row">
+            <div class="demo-stat-box">
+              <div class="label">Balance</div>
+              <div class="value">K 24,580</div>
+              <div class="change">↑ +2.4%</div>
+            </div>
+            <div class="demo-stat-box">
+              <div class="label">Savings</div>
+              <div class="value">K 8,240</div>
+              <div class="change">↑ +5.1%</div>
+            </div>
+            <div class="demo-stat-box">
+              <div class="label">Investments</div>
+              <div class="value">K 15,090</div>
+              <div class="change">↑ +8.3%</div>
+            </div>
+          </div>
+          <div class="demo-chart-bar">
+            <div class="demo-chart-label">Monthly Activity</div>
+            <div class="demo-bars">
+              <div class="demo-bar" style="height:40%;"></div>
+              <div class="demo-bar" style="height:60%;"></div>
+              <div class="demo-bar" style="height:45%;"></div>
+              <div class="demo-bar" style="height:80%;"></div>
+              <div class="demo-bar" style="height:55%;"></div>
+              <div class="demo-bar" style="height:70%;background:linear-gradient(180deg,var(--am-400),var(--am-600));"></div>
+              <div class="demo-bar" style="height:90%;background:linear-gradient(180deg,var(--am-400),var(--am-600));"></div>
+            </div>
+          </div>
+          <div class="demo-txn-list">
+            <div class="demo-txn">
+              <div><div class="demo-txn-name">Loan Repayment</div><div class="demo-txn-date">Today, 9:14 AM</div></div>
+              <div class="demo-txn-amount debit">– K 850</div>
+            </div>
+            <div class="demo-txn">
+              <div><div class="demo-txn-name">Salary Credit</div><div class="demo-txn-date">Yesterday, 11:00 AM</div></div>
+              <div class="demo-txn-amount credit">+ K 4,200</div>
+            </div>
+            <div class="demo-txn">
+              <div><div class="demo-txn-name">Investment Return</div><div class="demo-txn-date">Mon, 2:30 PM</div></div>
+              <div class="demo-txn-amount credit">+ K 620</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Platform Features ──────────────────────────────────── -->
+<section class="section section-white" aria-labelledby="features-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Platform Features</span>
+      <h2 id="features-heading">Everything You Need to Manage Your Finances</h2>
+      <p>Our digital banking platform is designed for simplicity, speed, and security — giving you full control with minimal effort.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;">
+      <div class="demo-feature">
+        <div class="demo-feature-icon" style="background:var(--pu-100);">🏦</div>
+        <div>
+          <h3>Account Management</h3>
+          <p>View real-time balances, download statements, and manage all your accounts — savings, current, and investment — from a single dashboard.</p>
+        </div>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon" style="background:var(--am-100);">💸</div>
+        <div>
+          <h3>Fund Transfers</h3>
+          <p>Transfer funds between accounts or to other recipients quickly and securely. Set up scheduled transfers and payment automations with ease.</p>
+        </div>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon" style="background:#EDF7F0;">📊</div>
+        <div>
+          <h3>Investment Tracking</h3>
+          <p>Monitor your investment portfolio in real time. View performance charts, returns, and access your wealth management advisor reports online.</p>
+        </div>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon" style="background:#EEF2FF;">📋</div>
+        <div>
+          <h3>Loan Applications</h3>
+          <p>Apply for personal loans, business credit, or overdraft facilities directly through the portal with streamlined digital forms and fast approval.</p>
+        </div>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon" style="background:#FFF5F5;">🔒</div>
+        <div>
+          <h3>Security &amp; Privacy</h3>
+          <p>Bank-grade encryption, multi-factor authentication, and 24/7 monitoring protect every transaction and keep your data completely private.</p>
+        </div>
+      </div>
+      <div class="demo-feature">
+        <div class="demo-feature-icon" style="background:#F0F9FF;">📱</div>
+        <div>
+          <h3>Mobile Ready</h3>
+          <p>Access your full account from any device. Our platform is optimised for desktop, tablet, and mobile — so your finances are always with you.</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ── CTA ─────────────────────────────────────────────────── -->
+<section class="section" style="background:linear-gradient(140deg,var(--pu-800),var(--pu-600));position:relative;overflow:hidden;" aria-labelledby="demo-cta-heading">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;right:-180px;top:-180px;background:radial-gradient(circle,rgba(245,157,31,0.18) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="wrap" style="position:relative;z-index:1;text-align:center;">
+    <span class="eyebrow eyebrow-amber" style="justify-content:center;">Ready to Get Started?</span>
+    <h2 id="demo-cta-heading" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:var(--white);margin-bottom:0.9rem;">Experience Wincorp Finance Digital Banking</h2>
+    <p style="font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:560px;margin:0 auto 2.25rem;line-height:1.78;">Register today and gain access to the full Wincorp Finance digital banking platform. Manage your finances with confidence, security, and ease.</p>
+    <div style="display:flex;gap:0.9rem;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn-accent btn-lg" href="{% url 'register' %}" target="_blank" rel="noopener">Create an Account</a>
+      <a class="btn btn-ghost btn-lg" href="{% url 'login_user' %}" target="_blank" rel="noopener">Log In to Portal</a>
+      <a class="btn btn-ghost btn-lg" href="{% url 'how_to_videos' %}">Watch How-To Videos</a>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

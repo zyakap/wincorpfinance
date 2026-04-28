@@ -1,39 +1,292 @@
 {% extends "website/website_base.html" %}
 {% load static %}
 
-{% block title %}Contact | WINCORP FINANCE{% endblock %}
+{% block title %}Contact Us | Wincorp Finance Limited{% endblock %}
+{% block meta_description %}Get in touch with Wincorp Finance Limited. Register for a new account, access the client portal, or download our business profile.{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* ── Contact layout ──────────────────────────────────── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Form card */
+  .form-card {
+    background: var(--white);
+    border-radius: var(--r-xl);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-md);
+    padding: 2.5rem;
+  }
+  .form-card h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink-900);
+    margin-bottom: 0.5rem;
+  }
+  .form-card > p {
+    font-size: 0.95rem;
+    color: var(--ink-500);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.1rem; }
+  .form-group label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ink-700);
+    letter-spacing: 0.02em;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.82rem 1rem;
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    font-family: inherit;
+    font-size: 0.93rem;
+    color: var(--ink-900);
+    outline: none;
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--pu-400);
+    box-shadow: 0 0 0 3px rgba(97, 26, 101, 0.10);
+    background: var(--white);
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+  .form-group select   { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236E6380' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+  .form-submit { width: 100%; margin-top: 0.5rem; padding: 1rem; font-size: 1rem; }
+  .form-note   { font-size: 0.8rem; color: var(--ink-500); text-align: center; margin-top: 0.8rem; line-height: 1.6; }
+
+  /* Sidebar */
+  .contact-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .access-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 1.75rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .access-card:hover { box-shadow: var(--sh-lg); transform: translateY(-2px); }
+  .access-card-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .access-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.4rem; }
+  .access-card p  { font-size: 0.9rem; color: var(--ink-500); line-height: 1.7; margin-bottom: 1.1rem; }
+  .access-card .btn { width: 100%; justify-content: center; }
+
+  .purple-card {
+    background: linear-gradient(140deg, var(--pu-800), var(--pu-600));
+    border-radius: var(--r-xl);
+    padding: 2rem;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .purple-card::after {
+    content: "";
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    right: -60px; bottom: -60px;
+    background: radial-gradient(circle, rgba(245,157,31,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .purple-card-inner { position: relative; z-index: 1; }
+  .purple-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--white); margin-bottom: 0.75rem; }
+  .purple-card p  { font-size: 0.9rem; color: rgba(255,255,255,0.78); line-height: 1.72; margin-bottom: 1.25rem; }
+  .purple-card .btn { width: 100%; justify-content: center; }
+
+  /* Info boxes at bottom */
+  .info-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .info-box {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 1.75rem;
+    text-align: center;
+  }
+  .info-box-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin: 0 auto 1rem;
+  }
+  .info-box h4 { font-size: 1rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.4rem; }
+  .info-box p  { font-size: 0.88rem; color: var(--ink-500); line-height: 1.65; }
+
+  @media (max-width: 960px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row     { grid-template-columns: 1fr; }
+    .info-strip   { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .form-card { padding: 1.75rem; }
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="section">
-    <div class="page-hero panel">
-      <span class="eyebrow">Contact And Access</span>
-      <h1>Use the official WINCORP routes to continue.</h1>
-      <p>
-        This contact page keeps access simple: review the company profile, create an account,
-        or sign in to the existing portal through the preserved Django links.
-      </p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
-        <a class="btn btn-secondary" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
-        <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Business Profile</a>
+
+<!-- ── Page Banner ────────────────────────────────────────── -->
+<section class="page-banner" aria-label="Contact Wincorp Finance">
+  <div class="wrap page-banner-inner">
+    <span class="eyebrow eyebrow-amber">Contact &amp; Access</span>
+    <h1>Get in Touch with Wincorp Finance</h1>
+    <p>Have a question about our services? Need to access the client portal? We are here to help. Reach out and our team will respond promptly.</p>
+  </div>
+</section>
+
+<!-- ── Contact Form + Sidebar ─────────────────────────────── -->
+<section class="section section-bg" aria-labelledby="contact-heading">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <!-- Form -->
+      <div class="form-card">
+        <span class="eyebrow">Send a Message</span>
+        <h2 id="contact-heading">How Can We Help You?</h2>
+        <p>Fill in the form below and a member of our team will be in touch as soon as possible.</p>
+
+        <form method="post" action="{% url 'contact' %}" novalidate>
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" name="first_name" placeholder="e.g. Albert" required />
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" placeholder="e.g. Kelgai" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+675 XXX XXXX" />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject">
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="personal">Personal Finance</option>
+                <option value="business">Business &amp; Corporate</option>
+                <option value="investment">Investment &amp; Wealth</option>
+                <option value="loan">Loan &amp; Credit</option>
+                <option value="advisory">Financial Advisory</option>
+                <option value="digital">Digital Banking</option>
+                <option value="account">Account Support</option>
+                <option value="other">Other Enquiry</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us how we can help you…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">Send Message →</button>
+          <p class="form-note">By submitting this form you agree to our privacy policy. We will never share your information with third parties.</p>
+        </form>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="contact-sidebar">
+
+        <div class="purple-card">
+          <div class="purple-card-inner">
+            <span class="eyebrow eyebrow-amber">Client Portal</span>
+            <h3>Already a Client?</h3>
+            <p>Access your account, manage your finances, and use all our digital banking services through the secure client portal.</p>
+            <a class="btn btn-accent" href="{% url 'login_user' %}" target="_blank" rel="noopener">Log In to Portal →</a>
+          </div>
+        </div>
+
+        <div class="access-card">
+          <div class="access-card-icon" style="background:var(--pu-100);">✍️</div>
+          <h3>New Client Registration</h3>
+          <p>Not yet a client? Create your account today and gain access to our full range of financial products and digital banking services.</p>
+          <a class="btn btn-primary" href="{% url 'register' %}" target="_blank" rel="noopener">Register Now</a>
+        </div>
+
+        <div class="access-card">
+          <div class="access-card-icon" style="background:var(--am-100);">📄</div>
+          <h3>Business Profile</h3>
+          <p>Download our official company profile to learn more about Wincorp Finance Limited, our services, structure, and values.</p>
+          <a class="btn btn-accent" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">Download PDF</a>
+        </div>
+
+        <div class="access-card" style="background:var(--bg);">
+          <div class="access-card-icon" style="background:var(--white);">🎥</div>
+          <h3>How-To Videos</h3>
+          <p>Need help navigating our platform? Our training videos walk you through every feature step by step.</p>
+          <a class="btn btn-outline" href="{% url 'how_to_videos' %}">Watch Videos</a>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="metrics-grid">
-      <article class="metric">
-        <h3>New clients</h3>
-        <p>Start with the registration link to enter the existing account creation flow.</p>
-      </article>
-      <article class="metric">
-        <h3>Returning clients</h3>
-        <p>Use the login route for direct access to the current WINCORP application portal.</p>
-      </article>
-      <article class="metric">
-        <h3>Company information</h3>
-        <p>Open the official business profile for supporting company material and presentation context.</p>
-      </article>
+<!-- ── Info Boxes ──────────────────────────────────────────── -->
+<section class="section section-white" aria-label="Client access options">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Quick Access</span>
+      <h2>Three Ways to Connect with Us</h2>
     </div>
-  </section>
+    <div class="info-strip">
+      <div class="info-box">
+        <div class="info-box-icon" style="background:var(--pu-100);">💬</div>
+        <h4>New Clients</h4>
+        <p>Start with the registration link to enter our secure account creation process. Gain access to the full Wincorp Finance digital platform.</p>
+        <a class="btn btn-primary btn-sm" style="margin-top:1rem;display:inline-flex;" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon" style="background:var(--am-100);">🔑</div>
+        <h4>Returning Clients</h4>
+        <p>Use the login route for direct access to the Wincorp Finance application portal and all your account services.</p>
+        <a class="btn btn-accent btn-sm" style="margin-top:1rem;display:inline-flex;" href="{% url 'login_user' %}" target="_blank" rel="noopener">Login</a>
+      </div>
+      <div class="info-box">
+        <div class="info-box-icon" style="background:#EDF7F0;">📋</div>
+        <h4>Company Information</h4>
+        <p>Open the official business profile for detailed company material, our full service offering, and organisational information.</p>
+        <a class="btn btn-outline btn-sm" style="margin-top:1rem;display:inline-flex;" href="{% static 'clientfiles/Wincorp Finance Business Profile.pdf' %}" target="_blank" rel="noopener">View Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

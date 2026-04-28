@@ -1,20 +1,244 @@
 {% extends "website/website_base.html" %}
+{% load static %}
 
-{% block title %}DCC | WINCORP FINANCE{% endblock %}
+{% block title %}DCC — Debt Credit Compliance | Wincorp Finance Limited{% endblock %}
+{% block meta_description %}Wincorp Finance Limited is committed to responsible lending and credit compliance. Learn about our risk management policies and our link to the Dina U Control Centre (DCC).{% endblock %}
+
+{% block extra_head %}
+<style>
+  .dcc-principle {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .dcc-principle:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+  .dcc-principle-num {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pu-400);
+  }
+  .dcc-principle h3 { font-size: 1.08rem; font-weight: 700; color: var(--ink-900); }
+  .dcc-principle p  { font-size: 0.92rem; color: var(--ink-500); line-height: 1.72; }
+
+  .dcc-cta-box {
+    background: linear-gradient(135deg, var(--pu-800), var(--pu-600));
+    border-radius: var(--r-xl);
+    padding: 3rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+  .dcc-cta-box::after {
+    content: "";
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    right: -150px; bottom: -150px;
+    background: radial-gradient(circle, rgba(245,157,31,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .dcc-cta-inner { position: relative; z-index: 1; }
+  .dcc-cta-box h3 { font-size: 1.6rem; font-weight: 800; color: var(--white); margin-bottom: 0.65rem; letter-spacing: -0.02em; }
+  .dcc-cta-box p  { font-size: 0.97rem; color: rgba(255,255,255,0.80); line-height: 1.75; max-width: 480px; }
+  .dcc-cta-btns   { display: flex; gap: 0.85rem; flex-wrap: wrap; flex-shrink: 0; position: relative; z-index: 1; }
+
+  .risk-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    padding: 1.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .risk-card:hover { box-shadow: var(--sh-md); }
+  .risk-card-icon {
+    width: 44px; height: 44px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .risk-card h4 { font-size: 0.97rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.35rem; }
+  .risk-card p  { font-size: 0.88rem; color: var(--ink-500); line-height: 1.68; }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="section">
-    <div class="page-hero panel">
-      <span class="eyebrow">DCC</span>
-      <h1>Credit review and responsible lending remain part of a modern finance experience.</h1>
-      <p>
-        This page preserves the existing DCC route while presenting it in a cleaner layout that
-        better fits the updated WINCORP FINANCE website.
-      </p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="{% url 'home' %}">Homepage</a>
-        <a class="btn btn-secondary" href="http://www.dinaucontrolcentre.com/" target="_blank" rel="noopener">Visit DCC</a>
+
+<!-- ── Page Banner ────────────────────────────────────────── -->
+<section class="page-banner" aria-label="DCC — Debt Credit Compliance">
+  <div class="wrap page-banner-inner">
+    <span class="eyebrow eyebrow-amber">Responsible Finance</span>
+    <h1>Debt Credit Compliance (DCC)</h1>
+    <p>Wincorp Finance Limited is committed to responsible lending, transparent credit practices, and full compliance with all financial regulations to protect our clients and the integrity of our operations.</p>
+    <div class="page-banner-actions">
+      <a class="btn btn-accent" href="http://www.dinaucontrolcentre.com/" target="_blank" rel="noopener">Visit DCC Website ↗</a>
+      <a class="btn btn-ghost" href="{% url 'home' %}">Return Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── DCC Overview ───────────────────────────────────────── -->
+<section class="section section-white" aria-labelledby="dcc-overview-heading">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;">
+
+      <div>
+        <span class="eyebrow">What is DCC?</span>
+        <h2 id="dcc-overview-heading" style="font-size:clamp(1.7rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.03em;line-height:1.12;color:var(--ink-900);margin-bottom:1.1rem;">
+          The Dina U Control Centre
+        </h2>
+        <p style="font-size:1rem;line-height:1.8;color:var(--ink-500);margin-bottom:1rem;">The Dina U Control Centre (DCC) is an independent credit compliance and debt management system that Wincorp Finance works with to ensure responsible lending practices and client financial protection.</p>
+        <p style="font-size:1rem;line-height:1.8;color:var(--ink-500);margin-bottom:1.5rem;">DCC promotes financial discipline, helps manage debt obligations responsibly, and ensures that lending decisions are made fairly, transparently, and within regulatory requirements.</p>
+        <a class="btn btn-primary" href="http://www.dinaucontrolcentre.com/" target="_blank" rel="noopener">Visit DCC Website ↗</a>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="risk-card">
+          <div class="risk-card-icon" style="background:var(--pu-100);">📋</div>
+          <div>
+            <h4>Credit Assessment</h4>
+            <p>Independent, rigorous credit assessments that evaluate borrower capacity fairly, protecting both clients and the institution.</p>
+          </div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-card-icon" style="background:var(--am-100);">🤝</div>
+          <div>
+            <h4>Responsible Lending</h4>
+            <p>We only approve credit where clients can comfortably service obligations, ensuring no one is over-extended financially.</p>
+          </div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-card-icon" style="background:#EDF7F0;">🛡️</div>
+          <div>
+            <h4>Client Protection</h4>
+            <p>DCC mechanisms protect borrowers from predatory lending and ensure all credit decisions meet strict ethical and regulatory standards.</p>
+          </div>
+        </div>
+        <div class="risk-card">
+          <div class="risk-card-icon" style="background:#EEF2FF;">✅</div>
+          <div>
+            <h4>Regulatory Alignment</h4>
+            <p>All DCC-linked lending processes are fully aligned with national financial regulations and international best practices.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Our Compliance Principles ─────────────────────────── -->
+<section class="section section-bg" aria-labelledby="principles-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Our Commitment</span>
+      <h2 id="principles-heading">Responsible Finance Principles</h2>
+      <p>At Wincorp Finance Limited, responsible lending and financial compliance are not just policies — they are core to who we are and how we operate every day.</p>
+    </div>
+
+    <div class="g3">
+      <div class="dcc-principle">
+        <div class="dcc-principle-num">Principle 01</div>
+        <h3>Risk Management</h3>
+        <p>Comprehensive risk management policies identify, assess, and mitigate potential financial and operational risks, ensuring the safety of our clients' assets at all times.</p>
+      </div>
+      <div class="dcc-principle">
+        <div class="dcc-principle-num">Principle 02</div>
+        <h3>Transparent Lending</h3>
+        <p>All loan terms, interest rates, and repayment schedules are communicated clearly and honestly before any credit agreement is finalised.</p>
+      </div>
+      <div class="dcc-principle">
+        <div class="dcc-principle-num">Principle 03</div>
+        <h3>Fair Credit Assessment</h3>
+        <p>Credit decisions are based on objective criteria, ensuring every applicant is assessed fairly without discrimination or bias.</p>
+      </div>
+      <div class="dcc-principle">
+        <div class="dcc-principle-num">Principle 04</div>
+        <h3>Debt Sustainability</h3>
+        <p>We assess each client's ability to service debt obligations without financial hardship, promoting long-term financial wellness over short-term gain.</p>
+      </div>
+      <div class="dcc-principle">
+        <div class="dcc-principle-num">Principle 05</div>
+        <h3>Regulatory Compliance</h3>
+        <p>Wincorp Finance strictly adheres to all relevant financial regulations and reporting requirements, ensuring full legal compliance in all credit operations.</p>
+      </div>
+      <div class="dcc-principle">
+        <div class="dcc-principle-num">Principle 06</div>
+        <h3>Client Support</h3>
+        <p>Clients experiencing financial difficulty can access dedicated support, restructuring options, and financial guidance to help them navigate challenges responsibly.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ── Security & Data Protection ────────────────────────── -->
+<section class="section section-white" aria-labelledby="security-heading">
+  <div class="wrap">
+    <div class="sh center">
+      <span class="eyebrow">Safety &amp; Security</span>
+      <h2 id="security-heading">Protecting Your Data &amp; Assets</h2>
+      <p>Our security infrastructure is built to the highest industry standards, keeping your personal and financial information safe at every level.</p>
+    </div>
+
+    <div class="g4">
+      <div class="card card-accent-top" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🔐</div>
+        <h3>Encryption</h3>
+        <p>All data is encrypted in transit and at rest using industry-standard protocols, preventing unauthorised interception or access.</p>
+      </div>
+      <div class="card card-accent-top" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🔑</div>
+        <h3>Multi-Factor Auth</h3>
+        <p>Two or more verification factors are required for account access, dramatically reducing the risk of unauthorised logins.</p>
+      </div>
+      <div class="card card-accent-top" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">👁️</div>
+        <h3>24/7 Monitoring</h3>
+        <p>Continuous monitoring systems detect suspicious activity and trigger immediate responses to protect client accounts.</p>
+      </div>
+      <div class="card card-accent-top" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🛡️</div>
+        <h3>Data Privacy</h3>
+        <p>We comply with all applicable data protection and privacy laws, ensuring your personal information is handled with the utmost care.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DCC CTA ─────────────────────────────────────────────── -->
+<section class="section section-bg" aria-labelledby="dcc-cta-heading">
+  <div class="wrap">
+    <div class="dcc-cta-box">
+      <div class="dcc-cta-inner">
+        <span class="eyebrow eyebrow-amber">External Resource</span>
+        <h3 id="dcc-cta-heading">Visit the Dina U Control Centre</h3>
+        <p>Access the DCC platform directly for credit compliance tools, debt management resources, and detailed information about responsible lending standards and borrower rights.</p>
+      </div>
+      <div class="dcc-cta-btns">
+        <a class="btn btn-accent btn-lg" href="http://www.dinaucontrolcentre.com/" target="_blank" rel="noopener">Visit DCC Website ↗</a>
+        <a class="btn btn-ghost btn-lg" href="{% url 'contact' %}">Contact Wincorp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

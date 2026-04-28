@@ -1,20 +1,404 @@
 {% extends "website/website_base.html" %}
+{% load static %}
 
-{% block title %}How-To Videos | WINCORP FINANCE{% endblock %}
+{% block title %}How-To Videos | Wincorp Finance Limited{% endblock %}
+{% block meta_description %}Watch step-by-step training videos for the Wincorp Finance platform. Learn how to register, manage your accounts, apply for loans, transfer funds, and more.{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* ── Video card ───────────────────────────────────────── */
+  .video-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line);
+    box-shadow: var(--sh-sm);
+    overflow: hidden;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+    display: flex;
+    flex-direction: column;
+  }
+  .video-card:hover { box-shadow: var(--sh-lg); transform: translateY(-4px); }
+
+  .video-thumb {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(140deg, var(--pu-800), var(--pu-600));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  .video-thumb-amber {
+    background: linear-gradient(140deg, var(--am-600), var(--am-500));
+  }
+  .video-thumb-green {
+    background: linear-gradient(140deg, #155E38, #1D7A47);
+  }
+  .video-thumb-blue {
+    background: linear-gradient(140deg, #0C4A6E, #0369A1);
+  }
+  .video-thumb-red {
+    background: linear-gradient(140deg, #7F1D1D, #B91C1C);
+  }
+  .video-thumb-teal {
+    background: linear-gradient(140deg, #134E4A, #0F766E);
+  }
+
+  .video-play-btn {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .video-card:hover .video-play-btn {
+    background: rgba(255,255,255,0.28);
+    transform: scale(1.1);
+  }
+  .video-play-btn::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 0 9px 16px;
+    border-color: transparent transparent transparent white;
+    margin-left: 3px;
+  }
+
+  .video-duration {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.7rem;
+    background: rgba(0,0,0,0.55);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--r-xs);
+    z-index: 1;
+  }
+
+  .video-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+  .video-category {
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pu-500);
+    margin-bottom: 0.5rem;
+  }
+  .video-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink-900);
+    line-height: 1.35;
+    margin-bottom: 0.55rem;
+  }
+  .video-card p {
+    font-size: 0.88rem;
+    color: var(--ink-500);
+    line-height: 1.68;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .video-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--ink-500);
+    border-top: 1px solid var(--line);
+    padding-top: 0.85rem;
+    margin-top: auto;
+  }
+  .video-level {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--r-pill);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .level-beginner     { background: #D1FAE5; color: #065F46; }
+  .level-intermediate { background: var(--am-100); color: var(--am-700); }
+  .level-advanced     { background: var(--pu-100); color: var(--pu-600); }
+
+  /* Category filter tabs */
+  .filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .filter-tab {
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--r-pill);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1.5px solid var(--line);
+    color: var(--ink-500);
+    background: var(--white);
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+  }
+  .filter-tab:hover,
+  .filter-tab.is-active {
+    background: var(--pu-600);
+    color: var(--white);
+    border-color: var(--pu-600);
+  }
+
+  /* Tip / help box */
+  .help-box {
+    background: linear-gradient(135deg, var(--pu-50), var(--am-50));
+    border: 1px solid var(--pu-100);
+    border-radius: var(--r-xl);
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .help-box h3 { font-size: 1.3rem; font-weight: 800; color: var(--ink-900); margin-bottom: 0.5rem; }
+  .help-box p  { font-size: 0.95rem; color: var(--ink-500); line-height: 1.72; max-width: 480px; }
+  .help-btns   { display: flex; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap; }
+</style>
+{% endblock %}
 
 {% block content %}
-  <section class="section">
-    <div class="page-hero panel">
-      <span class="eyebrow">How-To Videos</span>
-      <h1>Training resources can still live here while the homepage carries the main brand story.</h1>
-      <p>
-        This route remains active and can be expanded later with WINCORP-specific onboarding
-        videos, walkthroughs, or client training material.
-      </p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="{% url 'home' %}">Homepage</a>
-        <a class="btn btn-secondary" href="{% url 'register' %}" target="_blank" rel="noopener">Register</a>
+
+<!-- ── Page Banner ────────────────────────────────────────── -->
+<section class="page-banner" aria-label="How-To Videos">
+  <div class="wrap page-banner-inner">
+    <span class="eyebrow eyebrow-amber">Training Resources</span>
+    <h1>How-To Videos &amp; Platform Tutorials</h1>
+    <p>Step-by-step video guides to help you get the most out of the Wincorp Finance digital banking platform. From registration to advanced account management — we cover it all.</p>
+    <div class="page-banner-actions">
+      <a class="btn btn-accent" href="{% url 'register' %}" target="_blank" rel="noopener">Create an Account</a>
+      <a class="btn btn-ghost" href="{% url 'login_user' %}" target="_blank" rel="noopener">Log In to Portal</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Video Library ──────────────────────────────────────── -->
+<section class="section section-bg" aria-labelledby="videos-heading">
+  <div class="wrap">
+    <div class="sh">
+      <span class="eyebrow">Video Library</span>
+      <h2 id="videos-heading">Learn the Wincorp Finance Platform</h2>
+      <p>Our training videos are designed to walk you through every feature of the Wincorp Finance platform — clear, concise, and beginner-friendly.</p>
+    </div>
+
+    <div class="filter-tabs" role="list" aria-label="Filter by category">
+      <button class="filter-tab is-active" type="button">All Videos</button>
+      <button class="filter-tab" type="button">Getting Started</button>
+      <button class="filter-tab" type="button">Account Management</button>
+      <button class="filter-tab" type="button">Loans &amp; Credit</button>
+      <button class="filter-tab" type="button">Investments</button>
+      <button class="filter-tab" type="button">Security</button>
+    </div>
+
+    <div class="g3">
+
+      <!-- Video 1 -->
+      <article class="video-card">
+        <div class="video-thumb" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">4:32</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Getting Started</div>
+          <h3>How to Register Your Wincorp Finance Account</h3>
+          <p>A complete walkthrough of the registration process — from filling in your details to verifying your identity and activating your account.</p>
+          <div class="video-meta">
+            <span class="video-level level-beginner">Beginner</span>
+            <span>4 min 32 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 2 -->
+      <article class="video-card">
+        <div class="video-thumb video-thumb-amber" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">3:15</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Getting Started</div>
+          <h3>Logging In &amp; Navigating Your Dashboard</h3>
+          <p>Learn how to log in securely, navigate the main dashboard, and find all the key features and services available in your portal.</p>
+          <div class="video-meta">
+            <span class="video-level level-beginner">Beginner</span>
+            <span>3 min 15 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 3 -->
+      <article class="video-card">
+        <div class="video-thumb video-thumb-green" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">5:48</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Account Management</div>
+          <h3>Managing Your Accounts &amp; Viewing Statements</h3>
+          <p>Discover how to view all your accounts, check real-time balances, download bank statements, and track your transaction history.</p>
+          <div class="video-meta">
+            <span class="video-level level-beginner">Beginner</span>
+            <span>5 min 48 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 4 -->
+      <article class="video-card">
+        <div class="video-thumb video-thumb-blue" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">6:10</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Account Management</div>
+          <h3>Transferring Funds &amp; Setting Up Payments</h3>
+          <p>A step-by-step guide to transferring funds between accounts, paying bills, and setting up scheduled or recurring payment instructions.</p>
+          <div class="video-meta">
+            <span class="video-level level-intermediate">Intermediate</span>
+            <span>6 min 10 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 5 -->
+      <article class="video-card">
+        <div class="video-thumb video-thumb-red" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">7:25</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Loans &amp; Credit</div>
+          <h3>How to Apply for a Loan Online</h3>
+          <p>Learn how to complete a loan application through the portal — from choosing the right product to submitting your documentation and tracking approval.</p>
+          <div class="video-meta">
+            <span class="video-level level-intermediate">Intermediate</span>
+            <span>7 min 25 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 6 -->
+      <article class="video-card">
+        <div class="video-thumb video-thumb-teal" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">8:54</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Investments</div>
+          <h3>Tracking Your Investment Portfolio</h3>
+          <p>Understand how to monitor your investment portfolio, view performance reports, and communicate with your wealth management advisor through the portal.</p>
+          <div class="video-meta">
+            <span class="video-level level-intermediate">Intermediate</span>
+            <span>8 min 54 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 7 -->
+      <article class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(140deg,#1E3A5F,#2563EB);" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">5:02</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Security</div>
+          <h3>Setting Up Multi-Factor Authentication</h3>
+          <p>Protect your account by enabling multi-factor authentication. This tutorial shows you how to configure MFA quickly and keep your account secure.</p>
+          <div class="video-meta">
+            <span class="video-level level-beginner">Beginner</span>
+            <span>5 min 02 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 8 -->
+      <article class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(140deg,#4C1D95,#7C3AED);" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">9:18</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Account Management</div>
+          <h3>Understanding Your Financial Dashboard</h3>
+          <p>A deep-dive into all the features of your main dashboard — widgets, shortcuts, notifications, and how to customise your view for your specific needs.</p>
+          <div class="video-meta">
+            <span class="video-level level-advanced">Advanced</span>
+            <span>9 min 18 sec</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Video 9 -->
+      <article class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(140deg,#701A75,#A21CAF);" aria-hidden="true">
+          <div class="video-play-btn"></div>
+          <span class="video-duration">6:40</span>
+        </div>
+        <div class="video-body">
+          <div class="video-category">Loans &amp; Credit</div>
+          <h3>Managing Your Loan Repayments</h3>
+          <p>Learn how to track upcoming repayments, make early payments, view your loan schedule, and request a loan restructure through the platform.</p>
+          <div class="video-meta">
+            <span class="video-level level-intermediate">Intermediate</span>
+            <span>6 min 40 sec</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Help Box ────────────────────────────────────────────── -->
+<section class="section section-white" aria-labelledby="help-heading">
+  <div class="wrap">
+    <div class="help-box">
+      <div>
+        <span class="eyebrow">Need More Help?</span>
+        <h3 id="help-heading">Still Have Questions?</h3>
+        <p>Our support team is here to help. If you can't find the answer in our videos, contact us directly and a Wincorp Finance team member will assist you promptly.</p>
+      </div>
+      <div class="help-btns">
+        <a class="btn btn-primary btn-lg" href="{% url 'contact' %}">Contact Support</a>
+        <a class="btn btn-outline btn-lg" href="{% url 'demo' %}">Platform Demo</a>
+        <a class="btn btn-accent btn-lg" href="{% url 'register' %}" target="_blank" rel="noopener">Register Now</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_script %}
+<script>
+  // Filter tabs — simple active state toggle (no content filtering without JS data attributes)
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+    });
+  });
+</script>
 {% endblock %}
