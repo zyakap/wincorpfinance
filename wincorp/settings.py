@@ -441,7 +441,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": 'WINCORP FINANCE',
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "clientfiles/imgs/logo.png",
+    "site_logo": "clientfiles/wincorplogo.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
