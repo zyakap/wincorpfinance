@@ -149,8 +149,75 @@ class SMEProfileAdmin(admin.ModelAdmin):
         return self.readonly_fields
 
 
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user', 'category', 'first_name', 'last_name', 'email', 'mobile1', 'category', 'type_of_customer', 
+        'credit_rating', 'number_of_loans', 'has_loan', 'has_arrears', 'dcc_flagged', 'created_at'
+    )
+    list_filter = ('category', 'type_of_customer', 'province', 'has_loan', 'has_arrears', 'dcc_flagged')
+    search_fields = ('first_name', 'last_name', 'email', 'mobile1', 'nid_number', 'passport_number', 'drivers_license_number')
+    ordering = ('-created_at',)
+
+    fieldsets = (
+        ('Personal Information', {
+            'fields': ('user', 'category', 'first_name', 'middle_name', 'last_name', 'gender', 'date_of_birth', 'marital_status')
+        }),
+        ('Contact Details', {
+            'fields': ('email', 'mobile1', 'mobile2', 'work_phone', 'work_email')
+        }),
+        ('Identification', {
+            'fields': ('nid_number', 'passport_number', 'drivers_license_number', 'super_member_code')
+        }),
+        ('Residential Details', {
+            'fields': ('residential_address', 'residential_province', 'place_of_origin', 'province', 'resident_owner')
+        }),
+        ('Employer & Job Details', {
+            'fields': ('employer', 'sector', 'job_title', 'office_address', 'start_date', 'pay_frequency', 'last_paydate', 'gross_pay')
+        }),
+        ('Bank Account Info', {
+            'fields': ('bank', 'bank_account_name', 'bank_account_number', 'bank_branch')
+        }),
+        ('Loan & Financials', {
+            'fields': ('number_of_loans', 'credit_rating', 'repayment_limit', 'personal_interest_rate', 'has_loan', 'has_arrears', 'in_recovery')
+        }),
+        ('Account Management', {
+            'fields': ('account_requirements_check', 'requirement_check', 'credit_consent', 'terms_consent')
+        }),
+        ('Status Flags', {
+            'fields': ('default_flagged', 'dcc_flagged')
+        }),
+        ('Other Info', {
+            'fields': ('dcc', 'modeofregistration', 'opt1', 'opt2', 'opt3', 'opt4', 'opt5')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at', 'login_timestamp')
+        }),
+    )
+    readonly_fields = ('created_at', 'updated_at', 'login_timestamp')
+
+
+# Let me know if you want to refine anything or add inline displays for related models! 🚀
+
+@admin.register(StaffProfile)
+class StaffProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user','sid','type_of_staff','category','position_group','position'
+    )
+    list_filter = ('user','sid','type_of_staff','category','position_group','position')
+    search_fields = ('user','sid','type_of_staff','category','position_group','position')
+    readonly_fields = ('created_at', 'updated_at')
+
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('user','sid','type_of_staff','category','position_group','position')
+        }),
+    )
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return self.readonly_fields + ('user',)
+        return self.readonly_fields
+
 # Let me know if you’d like me to adjust anything — happy to refine this! 🚀
-
-   
-
 
