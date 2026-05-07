@@ -34,8 +34,8 @@ ALLOWED_HOSTS = ['wincorpfinance.com.pg','www.wincorpfinance.com.pg','45.77.237.
 
 #site settings
 SITE_NAME = 'WINCORP FINANCE'
-DOMAIN = 'http://45.77.237.180' # this will reduce the Sites framework db call.
-DOMAIN_DNS = '45.77.237.180'  #used here  email = f'{random_email}@{settings.DOMAIN_DNS}' in staff.views.py
+DOMAIN = 'https://www.wincorpfinance.com.pg' # this will reduce the Sites framework db call.
+DOMAIN_DNS = 'wincorpfinance.com.pg'  #used here  email = f'{random_email}@{settings.DOMAIN_DNS}' in staff.views.py
 PREFIX = 'WCF' # prefix for all the E-Intfinance generated codes
 
 MAIN_COLOR = '#6bb10d' #A751A7 #change out #3bd671   #website color was this: #1acc8d #040677
@@ -43,9 +43,9 @@ MAIN_COLOR = '#6bb10d' #A751A7 #change out #3bd671   #website color was this: #1
 # DO NOT FORGET : 'django.contrib.humanize', in apps 
 
 SUPPORT_EMAIL = 'support@wincorpfinance.com.pg'
-ADMIN_RECEIVER = 'admin@wincorpfinance.com.pg' #admin to receive notifications
-TEST_RECEIVER = 'admin@wincorpfinance.com.pg' # development TEST admin to receive notifications
-TEST_USER = 'admin@wincorpfinance.com.pg' #TEST user to receive notifications
+ADMIN_RECEIVER = 'loans@wincorpfinance.com.pg' #admin to receive notifications
+TEST_RECEIVER = 'loans@wincorpfinance.com.pg' # development TEST admin to receive notifications
+TEST_USER = 'loans@wincorpfinance.com.pg' #TEST user to receive notifications
 
 #DCC
 LUID = 'WCF55XG608'
@@ -110,20 +110,20 @@ BANK2_BRANCH = 'PORT MORESBY'
 BANK2_BSB = '088294'
 
 #email addresses
-ADMIN_EMAILS = ['app@wincorpfinance.com.pg','admin@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
-APPLICATION_FORM_EMAIL = ['loans@wincorpfinance.com.pg','app@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
-FUNDING_NOTICE_EMAIL = ['accounts@wincorpfinance.com.pg','app@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
-REPAYMENT_EMAIL = ['accounts@wincorpfinance.com.pg','app@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
-REPORTS_EMAIL = ['reports@wincorpfinance.com.pg','app@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
-DEFAULTS_EMAIL = ['recovery@wincorpfinance.com.pg','app@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
-NOTIFICATION_EMAILS = ['admin@wincorpfinance.com.pg', 'notifications@wincorpfinance.com.pg','admin@wincorpfinance.com.pg']
+ADMIN_EMAILS = ['app@wincorpfinance.com.pg','loans@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
+APPLICATION_FORM_EMAIL = ['loans@wincorpfinance.com.pg','app@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
+FUNDING_NOTICE_EMAIL = ['accounts@wincorpfinance.com.pg','app@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
+REPAYMENT_EMAIL = ['accounts@wincorpfinance.com.pg','app@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
+REPORTS_EMAIL = ['reports@wincorpfinance.com.pg','app@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
+DEFAULTS_EMAIL = ['recovery@wincorpfinance.com.pg','app@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
+NOTIFICATION_EMAILS = ['loans@wincorpfinance.com.pg', 'notifications@wincorpfinance.com.pg','loans@wincorpfinance.com.pg']
 
 DIRECTORS = []
 
 DEFAULT_SENDER_EMAIL = 'WINCORP FINANCE <app@wincorpfinance.com.pg>'
 #emails
-REPLY_TO_EMAIL = 'admin@wincorpfinance.com.pg'
-CC_EMAILS = ['admin@wincorpfinance.com.pg',]
+REPLY_TO_EMAIL = 'loans@wincorpfinance.com.pg'
+CC_EMAILS = ['loans@wincorpfinance.com.pg',]
 BCC_EMAILS = ['dev@webmasta.com.pg',]
 
 
