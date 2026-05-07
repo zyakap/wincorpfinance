@@ -82,6 +82,7 @@ INCREMENT_FN = 1
 TOTAL_ALLOWABLE_TOEAS = Decimal(0.01)
 LOAN_COMPLETION_BALANCE = Decimal(0.01)
 
+
 #VARIABLE INTEREST
 '''
 For all our personal loans or “PayDay” loans they are subject to the various rates based on the fortnightly repayment period:
